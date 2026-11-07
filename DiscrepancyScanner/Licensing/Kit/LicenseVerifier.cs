@@ -81,6 +81,9 @@ namespace ToolLicensing
         private readonly RevocationGuard revocation;
         private readonly TimeSpan onlineGrace;
 
+        /// <summary>How far the PC clock may sit behind the latest time seen before it counts as rolled back.</summary>
+        private static readonly TimeSpan ClockTolerance = TimeSpan.FromHours(24);
+
         /// <param name="clock">May be null (tests); then expiry is judged by the clock alone.</param>
         public LicenseVerifier(string publicKeyXml, MachineFingerprint machine, string userName,
             Func<DateTime> utcNow, ClockGuard clock)
@@ -192,6 +195,18 @@ namespace ToolLicensing
                 // Counted from the last good download, or from the issue date when there has been
                 // none - so deleting the local state never buys more offline time.
                 DateTime lastGood = Later(revocation.LastGoodCheckUtc, payload.IssuedAtUtc);
+
+                // The latest time this PC has been known to have: the last online check, the server's
+                // own clock at that check, and the saved clock. Going behind any of them is a rollback,
+                // even if the clock file was deleted.
+                DateTime latest = Later(Later(lastGood, revocation.ServerTimeUtc), clock == null ? null : clock.LastSeenUtc);
+                if (now < latest - ClockTolerance)
+                {
+                    return LicenseResult.Fail(LicenseStatus.ClockRolledBack,
+                        "The PC clock is earlier than the last online check (" + latest.ToString("yyyy-MM-dd HH:mm") +
+                        " UTC). Correct the clock, then connect this PC to the internet.");
+                }
+
                 if (clock != null && !clock.Check(now))
                 {
                     return LicenseResult.Fail(LicenseStatus.ClockRolledBack,

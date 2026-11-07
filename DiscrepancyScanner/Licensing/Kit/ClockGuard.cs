@@ -59,6 +59,12 @@ namespace ToolLicensing
             return true;
         }
 
+        /// <summary>The latest time this PC has been seen running a license check, or null if none is saved.</summary>
+        public DateTime? LastSeenUtc
+        {
+            get { return Read(); }
+        }
+
         private DateTime? Read()
         {
             try

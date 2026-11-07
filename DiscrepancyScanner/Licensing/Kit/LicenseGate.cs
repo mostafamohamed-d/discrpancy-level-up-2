@@ -18,7 +18,7 @@ namespace ToolLicensing
     public static class LicenseGate
     {
         private static bool dialogOpen;
-        private static bool refreshedThisRun;
+        private static bool refreshInFlight;
         private static bool warnedThisRun;
 
         /// <summary>Checks silently. Never shows anything.</summary>
@@ -67,6 +67,15 @@ namespace ToolLicensing
             {
                 WarnIfExpiringSoon(productName, result);
                 return true;
+            }
+
+            if (result.Status == LicenseStatus.Missing)
+            {
+                LicenseLog.Info("license", productId + ": no license file on this PC.");
+            }
+            else
+            {
+                LicenseLog.Error("license", productId + ": " + result.Status + " - " + result.Message);
             }
 
             // A second command started while the dialog is up must not open a second dialog.
@@ -129,11 +138,12 @@ namespace ToolLicensing
         public static void RefreshRevocation()
         {
             RevocationGuard guard = CreateRevocationGuard();
-            if (guard == null || refreshedThisRun)
+            // Every call is checked against the 6-hour interval below, so a list downloaded while the
+            // scanner is open takes effect on its next action. refreshInFlight only stops two overlapping downloads.
+            if (guard == null || refreshInFlight)
             {
                 return;
             }
-            refreshedThisRun = true;
 
             DateTime now = DateTime.UtcNow;
             DateTime? last = guard.LastGoodCheckUtc;
@@ -146,15 +156,23 @@ namespace ToolLicensing
             bool urgent = !last.HasValue || now - last.Value > TimeSpan.FromDays(Math.Max(0, LicensingOptions.OnlineGraceDays - 2));
             Action refresh = () =>
             {
-                if (guard.Refresh(url, DateTime.UtcNow, 8000))
+                try
                 {
-                    foreach (string id in guard.RevokedIds)
+                    if (guard.Refresh(url, DateTime.UtcNow, 8000))
                     {
-                        LicenseStore.Delete(id);
+                        foreach (string id in guard.RevokedIds)
+                        {
+                            LicenseStore.Delete(id);
+                        }
                     }
+                }
+                finally
+                {
+                    refreshInFlight = false;
                 }
             };
 
+            refreshInFlight = true;
             if (urgent)
             {
                 refresh();

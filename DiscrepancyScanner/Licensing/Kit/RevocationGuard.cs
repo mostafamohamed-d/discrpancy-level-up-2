@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -55,6 +56,21 @@ namespace ToolLicensing
             }
         }
 
+        /// <summary>
+        /// The newest time the download server reported (its Date header) on a successful check, or
+        /// null. Used as trusted time: a clock set back cannot go earlier than this.
+        /// </summary>
+        public DateTime? ServerTimeUtc
+        {
+            get
+            {
+                State state = Read();
+                return state == null || state.ServerTicks == 0
+                    ? (DateTime?)null
+                    : new DateTime(state.ServerTicks, DateTimeKind.Utc);
+            }
+        }
+
         public bool IsRevoked(string licenseId)
         {
             State state = Read();
@@ -78,9 +94,20 @@ namespace ToolLicensing
         /// </summary>
         public bool Apply(string listText, DateTime utcNow)
         {
+            return Apply(listText, utcNow, null);
+        }
+
+        /// <param name="serverTimeUtc">
+        /// The time the download server reported, or null. When given, it is recorded as the time of
+        /// the check instead of the PC's clock, so a wrong PC clock cannot move the grace period.
+        /// </param>
+        public bool Apply(string listText, DateTime utcNow, DateTime? serverTimeUtc)
+        {
             RevocationList list;
             if (!RevocationList.TryVerify(listText, publicKeyXml, out list))
             {
+                LicenseLog.Error("revocation",
+                    "The downloaded revocation list was rejected: it is not signed by the vendor or it was edited. Nothing changed.");
                 return false;
             }
 
@@ -89,10 +116,22 @@ namespace ToolLicensing
                 State current = Read();
                 if (current != null && list.Sequence < current.Sequence)
                 {
+                    LicenseLog.Error("revocation",
+                        "The downloaded revocation list (sequence " + list.Sequence + ") is older than the one already accepted (" +
+                        current.Sequence + "). It was ignored.");
                     return false;
                 }
 
-                Write(new State { LastGoodTicks = utcNow.Ticks, Sequence = list.Sequence, Revoked = list.Revoked });
+                DateTime checkedAt = serverTimeUtc ?? utcNow;
+                long previousServer = current == null ? 0 : current.ServerTicks;
+                long newServer = serverTimeUtc.HasValue ? serverTimeUtc.Value.Ticks : 0;
+                Write(new State
+                {
+                    LastGoodTicks = checkedAt.Ticks,
+                    Sequence = list.Sequence,
+                    Revoked = list.Revoked,
+                    ServerTicks = Math.Max(previousServer, newServer)
+                });
                 return true;
             }
         }
@@ -115,15 +154,35 @@ namespace ToolLicensing
                 request.Proxy.Credentials = CredentialCache.DefaultCredentials;
 
                 using (WebResponse response = request.GetResponse())
-                using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 {
-                    return Apply(reader.ReadToEnd(), utcNow);
+                    DateTime? serverTime = ServerDate(response);
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                    {
+                        return Apply(reader.ReadToEnd(), utcNow, serverTime);
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LicenseLog.Error("revocation",
+                    "Could not download the revocation list from " + url + ": " + LicenseLog.Describe(ex) +
+                    ". Licenses keep working until the grace period ends.");
                 return false;
             }
+        }
+
+        private static DateTime? ServerDate(WebResponse response)
+        {
+            string header = response.Headers["Date"];
+            DateTime parsed;
+            if (!string.IsNullOrEmpty(header) &&
+                DateTime.TryParse(header, CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out parsed))
+            {
+                return parsed;
+            }
+
+            return null;
         }
 
         private State Read()
@@ -150,6 +209,8 @@ namespace ToolLicensing
                 byte[] body = Convert.FromBase64String(parts[0]);
                 if (!Equal(Convert.FromBase64String(parts[1]), Sign(body)))
                 {
+                    LicenseLog.Error("revocation",
+                        "The saved revocation state was edited or damaged. It is treated as never checked.");
                     return null;
                 }
 
@@ -179,9 +240,10 @@ namespace ToolLicensing
                     File.Move(temp, path);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Not saved: the next start downloads again, and the grace period keeps counting.
+                LicenseLog.Error("revocation", "Could not save the revocation state: " + LicenseLog.Describe(ex));
             }
         }
 
@@ -214,6 +276,7 @@ namespace ToolLicensing
             [DataMember(Name = "lastGood", Order = 1)] public long LastGoodTicks { get; set; }
             [DataMember(Name = "sequence", Order = 2)] public long Sequence { get; set; }
             [DataMember(Name = "revoked", Order = 3)] public string[] Revoked { get; set; }
+            [DataMember(Name = "serverTime", Order = 4)] public long ServerTicks { get; set; }
         }
     }
 }

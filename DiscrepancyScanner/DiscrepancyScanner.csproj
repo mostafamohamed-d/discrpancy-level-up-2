@@ -275,6 +275,7 @@
     <Compile Include="Licensing\Kit\LicenseFile.cs" />
     <Compile Include="Licensing\Kit\LicenseGate.cs" />
     <Compile Include="Licensing\Kit\LicenseJson.cs" />
+    <Compile Include="Licensing\Kit\LicenseLog.cs" />
     <Compile Include="Licensing\Kit\LicensePayload.cs" />
     <Compile Include="Licensing\Kit\LicenseStore.cs" />
     <Compile Include="Licensing\Kit\LicenseVerifier.cs" />
