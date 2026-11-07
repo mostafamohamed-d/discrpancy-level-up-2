@@ -467,6 +467,9 @@
     <Compile Include="DataContainers\PairedFrame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Revit\RevitEngine.cs" />
+    <Compile Include="Revit\RevitEngine.ThickeningSurvey.cs" />
+    <Compile Include="Revit\RevitEngine.ThickeningDetection.cs" />
+    <Compile Include="Comparison\ThickeningDetection.cs" />
     <Compile Include="Revit\TextHandling.cs" />
     <Compile Include="DataContainers\MyTransformation.cs" />
     <Compile Include="gui\TranslationForm.cs">

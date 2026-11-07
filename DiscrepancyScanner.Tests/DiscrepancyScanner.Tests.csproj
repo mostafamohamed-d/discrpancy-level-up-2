@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeamPairingTests.cs" />
+    <Compile Include="ConstrainedDelaunayDuplicateTests.cs" />
     <Compile Include="MultiSelectionCardTests.cs" />
     <Compile Include="TabCountTests.cs" />
     <Compile Include="BeamIgnoreTests.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="WallCheckTests.cs" />
     <Compile Include="BeamSizeToleranceTests.cs" />
     <Compile Include="SlabCheckInputsTests.cs" />
+    <Compile Include="ThickeningDetectionTests.cs" />
     <Compile Include="LineLoadCheckInputsTests.cs" />
     <Compile Include="CrossPairTests.cs" />
     <Compile Include="WallCornerTests.cs" />

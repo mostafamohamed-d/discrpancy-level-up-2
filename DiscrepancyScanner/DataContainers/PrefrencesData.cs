@@ -375,6 +375,47 @@ namespace DiscrepancyScanner
         public bool WriteGeometryDump = false;
 
         /// <summary>
+        /// Writes a text file, on the next Revit import, of every body standing against each Revit
+        /// floor - its footprint, its heights against the floor's, and the depth the two make
+        /// together - read from the geometry and not from any name or parameter. Read-only:
+        /// nothing the check reads is changed by it. Off by default.
+        /// </summary>
+        public bool WriteThickeningSurvey = false;
+
+        /// <summary>
+        /// Revit ids of the floors the thickening survey looks at, separated by commas. Empty
+        /// surveys the first forty floors read.
+        /// </summary>
+        public string ThickeningSurveyFloorIds = "";
+
+        /// <summary>
+        /// Reads local thickenings of a floor - drop panels, pads - off the geometry standing
+        /// against it, and lets the slab check see the depth they make. A body counts when its
+        /// top is flush with the floor's, it reaches under the floor's underside, and it lies
+        /// over the floor; nothing is read from names or parameters. Off by default: with it off
+        /// no result of the check changes.
+        /// </summary>
+        public bool DetectLocalThickenings = false;
+
+        /// <summary>Share of a body's footprint that has to lie over the floor to be read as part of it, in per cent.</summary>
+        public double ThickeningMinOverlapPercent = 90d;
+
+        /// <summary>Heights this close are the same height, in mm.</summary>
+        public double ThickeningFlushToleranceMM = 10d;
+
+        /// <summary>How far under the floor's underside a body has to reach to add depth, in mm.</summary>
+        public double ThickeningMinProjectionMM = 50d;
+
+        /// <summary>Footprint area at which a body is a panel and not a strip, in m2. Evidence, not a cut-off.</summary>
+        public double ThickeningMinAreaM2 = 3d;
+
+        /// <summary>Short side at which a body is a panel and not a strip, in mm. Evidence, not a cut-off.</summary>
+        public double ThickeningMinShortSideMM = 1500d;
+
+        /// <summary>How fully a body fills the smallest rectangle round it, 0 to 1. Evidence, not a cut-off.</summary>
+        public double ThickeningMinCompactness = 0.85d;
+
+        /// <summary>
         /// Saves what the slab check reads for the level on show - the ETABS shells, the Revit
         /// floors with their holes, the columns and walls, the settings - to a file beside the
         /// user settings each time the slab check runs, so a finding can be run again on it

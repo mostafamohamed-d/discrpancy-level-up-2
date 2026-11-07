@@ -1007,6 +1007,15 @@ namespace DiscrepancyScanner.Wpf
                 SettingItem.OnComparison,
                 keywords: "structure layers measure");
 
+            Add(slabs, "DetectLocalThickenings", "Detect local thickenings from the geometry",
+                "Finds drop panels and pads modelled as separate bodies - framing, floors, generic "
+                + "models, anything - by their shape: top flush with the floor's, reaching under its "
+                + "underside, lying over it. The depth they make is then compared with ETABS. Names and "
+                + "parameters are never read. A body with no clear verdict is listed, not used. A "
+                + "thickening carries no PT or RC class of its own. Off leaves every result as it was.",
+                SettingItem.OnRevitImport,
+                keywords: "drop panel thickening pad geometry detect");
+
             Add(slabs, "CompareRibbedSlabsByOverallDepth", "Ribbed and waffle: compare the full depth",
                 "Off compares the topping, which suits the usual arrangement where Revit carries the "
                 + "topping as a floor and the ribs as beams.",
@@ -1493,6 +1502,53 @@ namespace DiscrepancyScanner.Wpf
                 SettingItem.OnRevitImport,
                 keywords: "log dump debug geometry fault",
                 note: geometryDumpNote);
+
+            Add(diagnostics, "WriteThickeningSurvey", "Survey what stands against the floors",
+                "Writes a text file, in the same folder as the geometry dump, listing the bodies "
+                + "standing against each Revit floor: footprint, heights against the floor's top and "
+                + "underside, and the depth the two make together. Read from the geometry, whatever "
+                + "the category or name. Changes nothing the check reads. Takes effect on the next "
+                + "Revit import.",
+                SettingItem.OnRevitImport,
+                keywords: "log dump debug geometry drop panel thickening survey");
+
+            Add(diagnostics, "ThickeningSurveyFloorIds", "Floors to survey",
+                "Revit ids of the floors the survey looks at, separated by commas. Empty surveys the "
+                + "first forty floors read.",
+                SettingItem.OnRevitImport,
+                keywords: "drop panel thickening survey floor id");
+
+            Add(diagnostics, "ThickeningMinOverlapPercent", "Thickening: share over the floor",
+                "How much of a body's footprint has to lie over the floor to be read as part of it. "
+                + "A body part way over is listed as ambiguous, not dropped.",
+                SettingItem.OnRevitImport, unit: "%",
+                keywords: "thickening drop panel overlap");
+
+            Add(diagnostics, "ThickeningFlushToleranceMM", "Thickening: flush tolerance",
+                "Heights this close are the same height: a body's top against the floor's top.",
+                SettingItem.OnRevitImport, unit: "mm",
+                keywords: "thickening drop panel flush");
+
+            Add(diagnostics, "ThickeningMinProjectionMM", "Thickening: least reach under the floor",
+                "How far under the floor's underside a body has to reach to add depth.",
+                SettingItem.OnRevitImport, unit: "mm",
+                keywords: "thickening drop panel projection");
+
+            Add(diagnostics, "ThickeningMinAreaM2", "Thickening: panel area",
+                "The footprint at which a body reads as a panel. Evidence towards a verdict, not a cut-off: "
+                + "a smaller body is listed with lower confidence.",
+                SettingItem.OnRevitImport, unit: "m2",
+                keywords: "thickening drop panel area");
+
+            Add(diagnostics, "ThickeningMinShortSideMM", "Thickening: panel short side",
+                "The short side at which a body reads as a panel and not a strip. Evidence, not a cut-off.",
+                SettingItem.OnRevitImport, unit: "mm",
+                keywords: "thickening drop panel width");
+
+            Add(diagnostics, "ThickeningMinCompactness", "Thickening: panel compactness",
+                "How fully a body fills the smallest rectangle round it, 0 to 1. Evidence, not a cut-off.",
+                SettingItem.OnRevitImport,
+                keywords: "thickening drop panel shape");
 
             Add(diagnostics, "SaveSlabCheckInputs", "Save the slab check's inputs for the level on show",
                 "Each time the slab check runs, writes everything it reads for the level on show - the "

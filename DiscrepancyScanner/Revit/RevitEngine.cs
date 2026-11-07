@@ -11,7 +11,7 @@ using Autodesk.Revit.UI;
 
 namespace DiscrepancyScanner
 {
-    public class RevitEngine
+    public partial class RevitEngine
     {
         List<PlacedElement> framesElements_r;
         List<FrameData_r> framesData = new List<FrameData_r>();
@@ -2688,6 +2688,42 @@ namespace DiscrepancyScanner
                             measuredByType.TryGetValue(typeName, out already);
                             measuredByType[typeName] = already + 1;
                         }
+                    }
+                }
+
+                // Off by default. Reads the bodies that thicken a floor locally off the geometry
+                // and hangs them on the floor they thicken; nothing else about a floor changes.
+                if (pref.DetectLocalThickenings)
+                {
+                    try
+                    {
+                        detectLocalThickenings(floorElements, pref);
+                    }
+                    catch (ImportStoppedException)
+                    {
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        addIssue("Local thickenings could not be detected, the floors are checked as they are: " + e.Message);
+                    }
+                }
+
+                // Read-only and off by default: writes a file about what stands against the
+                // floors and changes nothing the check reads.
+                if (pref.WriteThickeningSurvey)
+                {
+                    try
+                    {
+                        runThickeningSurvey(floorElements, pref);
+                    }
+                    catch (ImportStoppedException)
+                    {
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        addIssue("The thickening survey could not be written: " + e.Message);
                     }
                 }
             }

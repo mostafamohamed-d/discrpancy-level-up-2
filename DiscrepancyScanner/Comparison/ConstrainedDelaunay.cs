@@ -149,6 +149,7 @@ namespace DiscrepancyScanner
                 return;
             }
 
+            RemoveDuplicateConstraints();
             PreSplitCrossingConstraints();
             PreSplitConstraintsAtPoints();
 
@@ -164,6 +165,41 @@ namespace DiscrepancyScanner
         // ─────────────────────────────────────────────────────────────────
         //  Pre-processing
         // ─────────────────────────────────────────────────────────────────
+
+        /// <summary>
+        /// True when the crossing stage used all of its passes and was still
+        /// splitting, i.e. it did not converge. Normal inputs finish in well
+        /// under ten passes; a true value means the result may contain dust
+        /// points and the stage was slow.
+        /// </summary>
+        public bool CrossingStageDidNotConverge { get; private set; }
+
+        /// <summary>
+        /// Drops every constraint whose unordered point-index pair already
+        /// appeared earlier (first occurrence wins, order is kept). Constraints
+        /// carry no source, so a repeat adds nothing to the triangulation, but
+        /// repeated edges are split at different points by the crossing stage
+        /// and then overlap without sharing endpoints, which makes it split
+        /// without end. Compares point indices only: no tolerance is involved,
+        /// because the points were already merged when they were added.
+        /// </summary>
+        private void RemoveDuplicateConstraints()
+        {
+            if (Constraints.Count < 2) return;
+
+            var seen = new HashSet<long>();
+            int kept = 0;
+            for (int i = 0; i < Constraints.Count; i++)
+            {
+                var (a, b) = Constraints[i];
+                if (a == b) continue;
+                long key = a < b ? ((long)a << 32) | (uint)b : ((long)b << 32) | (uint)a;
+                if (!seen.Add(key)) continue;
+                Constraints[kept++] = (a, b);
+            }
+            if (kept < Constraints.Count)
+                Constraints.RemoveRange(kept, Constraints.Count - kept);
+        }
 
         /// <summary>
         /// Replaces every pair of strictly-crossing constraint segments with
@@ -239,6 +275,11 @@ namespace DiscrepancyScanner
 
                 if (!changed) return;
             }
+
+            CrossingStageDidNotConverge = true;
+            System.Diagnostics.Debug.WriteLine(
+                "ConstrainedDelaunay: crossing stage did not converge in " + MAX_PASSES + " passes ("
+                + Constraints.Count + " constraints, " + Points.Count + " points).");
         }
 
         /// <summary>

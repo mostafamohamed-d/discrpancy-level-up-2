@@ -771,6 +771,35 @@ namespace DiscrepancyScanner
                         });
                     }
                 }
+
+                // The local thickenings found against this floor, each its own region at its own
+                // measured depth. Nothing is merged: where they overlap, or overlap the floor,
+                // the point decides which is deepest.
+                foreach (ThickeningPatch patch in slab.Patches)
+                {
+                    if (patch.Outcome != ThickeningOutcome.Detected)
+                    {
+                        continue;
+                    }
+
+                    foreach (PlanPolygon footprint in patch.Plans)
+                    {
+                        coverage.Add(new SlabCoverage.Region
+                        {
+                            Plan = footprint,
+                            Thickness = patch.Thickness,
+                            Variable = false,
+                            RevitId = slab.RevitID,
+                            // No type name at all, so the PT/RC class reads as unknown whatever words
+                            // the settings list, and the PT/RC check is skipped for it.
+                            TypeName = "",
+                            Source = slab.GeometrySource,
+                            TopElevation = patch.TopElevation,
+                            BottomElevation = patch.BottomElevation,
+                            AtStoryPlane = atPlane
+                        });
+                    }
+                }
             }
 
             return coverage;

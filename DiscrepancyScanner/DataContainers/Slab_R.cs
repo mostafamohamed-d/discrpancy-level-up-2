@@ -107,7 +107,23 @@ namespace DiscrepancyScanner
 
             TopElevation += move.Translation.Z;
             BottomElevation += move.Translation.Z;
+
+            // The local thickenings read against this floor were read in the same frame, so
+            // they go through the same move and stay exactly where they were to the floor.
+            for (int i = 0; i < patches.Count; i++)
+            {
+                patches[i] = patches[i].Moved(plan => Moved(plan, move), move.Translation.Z);
+            }
         }
+
+        private readonly List<ThickeningPatch> patches = new List<ThickeningPatch>();
+
+        /// <summary>
+        /// Bodies standing against this floor that the detector judged a local thickening of it
+        /// (<see cref="ThickeningOutcome.Detected"/>) or could not judge (<see cref="ThickeningOutcome.Ambiguous"/>).
+        /// Empty unless the detection is on. Only the detected ones reach the slab check.
+        /// </summary>
+        public IList<ThickeningPatch> Patches { get { return patches; } }
 
         /// <summary>The same region, every point of it put through the move.</summary>
         private static PlanPolygon Moved(PlanPolygon polygon, MyTransformation move)

@@ -52,6 +52,86 @@ namespace DiscrepancyScanner
             [DataMember] public bool OpeningsUncertain;
             [DataMember] public PolygonRecord Plan;
             [DataMember] public List<PolygonRecord> Parts = new List<PolygonRecord>();
+            [DataMember] public List<PatchRecord> Patches = new List<PatchRecord>();
+        }
+
+        /// <summary>A local thickening read against a floor, with where it came from.</summary>
+        [DataContract]
+        public sealed class PatchRecord
+        {
+            [DataMember] public long HostFloorId;
+            [DataMember] public List<long> SourceElementIds = new List<long>();
+            [DataMember] public List<string> Provenance = new List<string>();
+            [DataMember] public List<PolygonRecord> Plans = new List<PolygonRecord>();
+            [DataMember] public double TopElevation;
+            [DataMember] public double BottomElevation;
+            [DataMember] public double BodyTop;
+            [DataMember] public double BodyBottom;
+            [DataMember] public double OverHostRatio;
+            [DataMember] public double FootprintArea;
+            [DataMember] public double ShortSide;
+            [DataMember] public double LongSide;
+            [DataMember] public double Compactness;
+            [DataMember] public string Classification = "Unknown";
+            [DataMember] public string Outcome = "";
+            [DataMember] public string Confidence = "";
+            [DataMember] public string Reason = "";
+            [DataMember] public List<string> Evidence = new List<string>();
+
+            public static PatchRecord From(ThickeningPatch patch)
+            {
+                return new PatchRecord
+                {
+                    HostFloorId = patch.HostFloorId,
+                    SourceElementIds = new List<long>(patch.SourceElementIds),
+                    Provenance = new List<string>(patch.Provenance),
+                    Plans = patch.Plans.Select(PolygonRecord.From).Where(plan => plan != null).ToList(),
+                    TopElevation = patch.TopElevation,
+                    BottomElevation = patch.BottomElevation,
+                    BodyTop = patch.BodyTop,
+                    BodyBottom = patch.BodyBottom,
+                    OverHostRatio = patch.OverHostRatio,
+                    FootprintArea = patch.FootprintArea,
+                    ShortSide = patch.ShortSide,
+                    LongSide = patch.LongSide,
+                    Compactness = patch.Compactness,
+                    Classification = patch.Classification,
+                    Outcome = patch.Outcome.ToString(),
+                    Confidence = patch.Confidence.ToString(),
+                    Reason = patch.Reason,
+                    Evidence = new List<string>(patch.Evidence)
+                };
+            }
+
+            public ThickeningPatch ToPatch()
+            {
+                ThickeningOutcome outcome;
+                ThickeningConfidence confidence;
+                Enum.TryParse(Outcome, out outcome);
+                Enum.TryParse(Confidence, out confidence);
+
+                return new ThickeningPatch
+                {
+                    HostFloorId = HostFloorId,
+                    SourceElementIds = new List<long>(SourceElementIds ?? new List<long>()),
+                    Provenance = new List<string>(Provenance ?? new List<string>()),
+                    Plans = (Plans ?? new List<PolygonRecord>()).Select(plan => plan.ToPolygon()).Where(plan => plan != null).ToList(),
+                    TopElevation = TopElevation,
+                    BottomElevation = BottomElevation,
+                    BodyTop = BodyTop,
+                    BodyBottom = BodyBottom,
+                    OverHostRatio = OverHostRatio,
+                    FootprintArea = FootprintArea,
+                    ShortSide = ShortSide,
+                    LongSide = LongSide,
+                    Compactness = Compactness,
+                    Classification = string.IsNullOrEmpty(Classification) ? "Unknown" : Classification,
+                    Outcome = outcome,
+                    Confidence = confidence,
+                    Reason = Reason ?? "",
+                    Evidence = new List<string>(Evidence ?? new List<string>())
+                };
+            }
         }
 
         [DataContract]
@@ -166,7 +246,8 @@ namespace DiscrepancyScanner
                     GeometrySource = floor.GeometrySource ?? Slab_R.FromSolid,
                     OpeningsUncertain = floor.OpeningsUncertain,
                     Plan = PolygonRecord.From(floor.Plan),
-                    Parts = floor.Parts.Select(PolygonRecord.From).Where(part => part != null).ToList()
+                    Parts = floor.Parts.Select(PolygonRecord.From).Where(part => part != null).ToList(),
+                    Patches = floor.Patches.Select(PatchRecord.From).ToList()
                 });
             }
 
@@ -227,6 +308,10 @@ namespace DiscrepancyScanner
                     OpeningsUncertain = record.OpeningsUncertain
                 };
                 floor.Parts = (record.Parts ?? new List<PolygonRecord>()).Select(part => part.ToPolygon()).ToList();
+                foreach (PatchRecord patch in record.Patches ?? new List<PatchRecord>())
+                {
+                    floor.Patches.Add(patch.ToPatch());
+                }
                 floors.Add(floor);
             }
             return floors;
