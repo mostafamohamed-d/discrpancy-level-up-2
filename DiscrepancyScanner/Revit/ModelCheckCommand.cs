@@ -26,6 +26,11 @@ namespace DiscrepancyScanner
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            if (!ToolLicensing.LicenseGate.EnsureLicensed(LicenseInfo.ProductId, LicenseInfo.Name))
+            {
+                return Result.Cancelled;
+            }
+
             // The external event has to be created from a Revit API context, which this is; the
             // modeless window then uses it to run picks and other API work on the Revit thread.
             RevitRequestHandler requestHandler = RevitRequestHandler.Create();

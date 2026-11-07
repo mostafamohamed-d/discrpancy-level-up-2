@@ -25,6 +25,11 @@ namespace DiscrepancyScanner
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            if (!ToolLicensing.LicenseGate.EnsureLicensed(LicenseInfo.ProductId, LicenseInfo.Name))
+            {
+                return Result.Cancelled;
+            }
+
             Form1 form = new Form1(commandData);
             form.KeyPreview = true;
             

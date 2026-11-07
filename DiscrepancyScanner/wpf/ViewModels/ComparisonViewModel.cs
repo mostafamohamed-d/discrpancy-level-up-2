@@ -3265,6 +3265,11 @@ namespace DiscrepancyScanner.Wpf
         /// </summary>
         private void RunCheck()
         {
+            if (!ToolLicensing.LicenseGate.EnsureLicensed(LicenseInfo.ProductId, LicenseInfo.Name))
+            {
+                return;
+            }
+
             PreflightReport report = BuildPreflight();
 
             if (report.IsClear || ShowPreflight == null)
@@ -3439,6 +3444,11 @@ namespace DiscrepancyScanner.Wpf
 
         private void Compare()
         {
+            if (!ToolLicensing.LicenseGate.EnsureLicensed(LicenseInfo.ProductId, LicenseInfo.Name))
+            {
+                return;
+            }
+
             IsChecking = true;
             stopRequested = false;
             CheckProgress = 0;

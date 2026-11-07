@@ -1,0 +1,1940 @@
+{
+  "DiscrepancyScanner.Tests/AcceptedFindingTests.cs": {
+    "mtime": 1793014679.7719133,
+    "seen": 1794066353.6063643,
+    "ast_hash": "b3610f67b099eeb9d0e4e057728860b7",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/AlignmentMoveTests.cs": {
+    "mtime": 1793014679.7719133,
+    "seen": 1794066353.606369,
+    "ast_hash": "5db2addbe1f9bf215bdfd8f34a936257",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/BeamIgnoreTests.cs": {
+    "mtime": 1793014679.7719133,
+    "seen": 1794066353.606371,
+    "ast_hash": "f37d696ad373c3a2702b899eb2c09d22",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/BeamPairingTests.cs": {
+    "mtime": 1793014679.7729802,
+    "seen": 1794066353.606372,
+    "ast_hash": "573f7a55d151c5cb3ca3a8d2567b5536",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/BeamSizeToleranceTests.cs": {
+    "mtime": 1793014679.7729802,
+    "seen": 1794066353.6063728,
+    "ast_hash": "c5e00442a4a035894b76febf00ab334f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/BusyLoadPlanTests.cs": {
+    "mtime": 1793014679.7729802,
+    "seen": 1794066353.6063735,
+    "ast_hash": "b4fe1f71e4c27d2f26884c82ba2525f9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/CheckPlaceTests.cs": {
+    "mtime": 1793014679.7729802,
+    "seen": 1794066353.6063745,
+    "ast_hash": "74169aa8c3b1216ecc245de236ab6990",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ColumnDetectionTests.cs": {
+    "mtime": 1793014679.7739794,
+    "seen": 1794066353.6063752,
+    "ast_hash": "c7e5e8e5d2b9fea71876df80b1599887",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ColumnOverlayTests.cs": {
+    "mtime": 1793014679.7739794,
+    "seen": 1794066353.6063757,
+    "ast_hash": "2a5ffc5d1f0a734173d6508974925da4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ColumnStorySplitTests.cs": {
+    "mtime": 1793098312.56299,
+    "seen": 1794066353.6063764,
+    "ast_hash": "1529a1dc310e8eefa75e70e3fa614bbf",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ConstrainedDelaunayDuplicateTests.cs": {
+    "mtime": 1794053619.4022899,
+    "seen": 1794066353.6063771,
+    "ast_hash": "74e3dbfbde86e725ebb9c6d14ce824ba",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/CrossPairTests.cs": {
+    "mtime": 1793014679.7739794,
+    "seen": 1794066353.606378,
+    "ast_hash": "a9207b20c9bc3edeba1ec378a0ba7810",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/DiscrepancyScanner.Tests.csproj": {
+    "mtime": 1794057371.5222049,
+    "seen": 1794066353.6063786,
+    "ast_hash": "ed5b4718ae9baecf8d670a87b8b1d4a6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/EndpointPairingTests.cs": {
+    "mtime": 1793014679.7749796,
+    "seen": 1794066353.6063793,
+    "ast_hash": "c36285564b2585460a70117bbd46916e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/EtabsTextFileTests.cs": {
+    "mtime": 1793014679.7749796,
+    "seen": 1794066353.60638,
+    "ast_hash": "65e86ec924f616e0b5923931ddfca49e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/HandDecisionPlaceTests.cs": {
+    "mtime": 1793014679.7749796,
+    "seen": 1794066353.6063805,
+    "ast_hash": "f9d5d49ab3d03d2748f62bd321f51be5",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/HeightZoneTests.cs": {
+    "mtime": 1793014679.7749796,
+    "seen": 1794066353.6063814,
+    "ast_hash": "d0b174604951df0ad3c2a2d9db937160",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LabelGroupTests.cs": {
+    "mtime": 1793014679.7749796,
+    "seen": 1794066353.6063821,
+    "ast_hash": "bbefacd0790402ac0db1117403b2d5f3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadCheckInputsTests.cs": {
+    "mtime": 1793014679.7766924,
+    "seen": 1794066353.6063826,
+    "ast_hash": "cef88d5f204712ed52fc83db5bebb72f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadCheckTests.cs": {
+    "mtime": 1793014679.777699,
+    "seen": 1794066353.6063833,
+    "ast_hash": "1d9c9cee9ad090bf8cc62c33b93abdda",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadCountTests.cs": {
+    "mtime": 1793014679.777699,
+    "seen": 1794066353.606384,
+    "ast_hash": "6ec8c3260a9c0c083eac94ab20c82e56",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadDuplicateTests.cs": {
+    "mtime": 1793014679.777699,
+    "seen": 1794066353.6063848,
+    "ast_hash": "c03103e15f0e1258cc2787b6a73a39f3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadScheduleTests.cs": {
+    "mtime": 1793014679.777699,
+    "seen": 1794066353.6063857,
+    "ast_hash": "e64eb9b6031ab356af006902bbe5c685",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadStyleSuggestionTests.cs": {
+    "mtime": 1793014679.778699,
+    "seen": 1794066353.6063862,
+    "ast_hash": "5039a1a9cb3a0c4b67b40d87c0cc3a3f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LineLoadWriteBackTests.cs": {
+    "mtime": 1793014679.778699,
+    "seen": 1794066353.606387,
+    "ast_hash": "688f09af340423b138b6bc032ed3639d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LoadPatternMappingTests.cs": {
+    "mtime": 1793014679.778699,
+    "seen": 1794066353.6063876,
+    "ast_hash": "d5d634e15792efa25a744371fb2895a2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LoadScheduleReaderTests.cs": {
+    "mtime": 1793014679.7796988,
+    "seen": 1794066353.6063883,
+    "ast_hash": "b4d7e807dbe07d6a060f0004789aa50d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LoadSetTableTests.cs": {
+    "mtime": 1793014679.7796988,
+    "seen": 1794066353.606389,
+    "ast_hash": "8e405222ab5c70d1c2b8a7a2873b88f6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LoadingPlanGuessTests.cs": {
+    "mtime": 1793014679.7796988,
+    "seen": 1794066353.6063898,
+    "ast_hash": "a1d7925debddf3f7284d47ef0f0f4023",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/LoadingPlanMarkerTests.cs": {
+    "mtime": 1793014679.7796988,
+    "seen": 1794066353.6063902,
+    "ast_hash": "8812ef6506dc54c86d45288c1abb66c7",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ModelIndexTests.cs": {
+    "mtime": 1793014679.7796988,
+    "seen": 1794066353.6063907,
+    "ast_hash": "4526f98b19b83aeebc9512628903071f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/MultiSelectionCardTests.cs": {
+    "mtime": 1793014679.7815535,
+    "seen": 1794066353.6063917,
+    "ast_hash": "d074369c5a1012f7bc7d7e5ec9ec2658",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/OneModelColourTests.cs": {
+    "mtime": 1793014679.7815535,
+    "seen": 1794066353.6063924,
+    "ast_hash": "a8905f38c013d20056e179efcff7a725",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/PairingOverrideTests.cs": {
+    "mtime": 1793014679.7815535,
+    "seen": 1794066353.6063929,
+    "ast_hash": "3d65eefb482ed574acaf26331cf79b03",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ParameterMappingTests.cs": {
+    "mtime": 1793698717.565189,
+    "seen": 1794066353.6063936,
+    "ast_hash": "b80174e12bb598cd408df4d3012838ba",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/PlanPolygonTests.cs": {
+    "mtime": 1793014679.7825582,
+    "seen": 1794066353.6063943,
+    "ast_hash": "fea3bfb6de954469c32722c3e4fdbbd6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/PlanRegionQuickTests.cs": {
+    "mtime": 1793014679.7825582,
+    "seen": 1794066353.6063948,
+    "ast_hash": "56ec88b9026a0a60b7998165dedfb14a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/PlanRegionsTests.cs": {
+    "mtime": 1793014679.7835648,
+    "seen": 1794066353.6063957,
+    "ast_hash": "e492534e9428899183ddbf3d0f80c2bf",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/PreflightTests.cs": {
+    "mtime": 1793014679.7835648,
+    "seen": 1794066353.6063962,
+    "ast_hash": "9a81a849d2e5d566bd4922bc6cd519fc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/Properties/AssemblyInfo.cs": {
+    "mtime": 1793014679.7835648,
+    "seen": 1794066353.606397,
+    "ast_hash": "e51aa58eb7d96bee25c58dbbf2ad3dda",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/RawDataTests.cs": {
+    "mtime": 1793014679.7845702,
+    "seen": 1794066353.6063974,
+    "ast_hash": "866df73f958fbe79b34e166f9053c3ad",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/RevitLeaveOutTests.cs": {
+    "mtime": 1793014679.7845702,
+    "seen": 1794066353.606398,
+    "ast_hash": "7e21f72c5289d402b2a698ceaf484ba5",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SafeLevelTests.cs": {
+    "mtime": 1793014679.7845702,
+    "seen": 1794066353.6063988,
+    "ast_hash": "36dcdfbeb8cd04b78c1dae649adc8b0d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SavedModelFileTests.cs": {
+    "mtime": 1793014679.78557,
+    "seen": 1794066353.6063998,
+    "ast_hash": "46cb831f44400f9c1fc49d84ba26eb5b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ScheduleEditTests.cs": {
+    "mtime": 1793014679.78557,
+    "seen": 1794066353.6064005,
+    "ast_hash": "41be218d811ef614a71b63e5abfd0bd3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ScopeChipTests.cs": {
+    "mtime": 1793014679.78557,
+    "seen": 1794066353.606401,
+    "ast_hash": "b72078d9a5278c07672fc0f08af07142",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SectionDesignerTableTests.cs": {
+    "mtime": 1793014679.78557,
+    "seen": 1794066353.6064017,
+    "ast_hash": "d01bf7b1a900dbb43769fdf9d2662a00",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SectionExtentsTests.cs": {
+    "mtime": 1793628745.151971,
+    "seen": 1794066353.6064024,
+    "ast_hash": "8c065ad2e1790d0c73a6698ec0aed2a6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SelectionPairingTests.cs": {
+    "mtime": 1793014679.7865694,
+    "seen": 1794066353.606403,
+    "ast_hash": "8420af0691c3d88ff904d2c4768e357f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SettingsPanelTests.cs": {
+    "mtime": 1793014679.7865694,
+    "seen": 1794066353.6064036,
+    "ast_hash": "68c7a7bd3c6caebfb93771b39c557e01",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ShortcutTests.cs": {
+    "mtime": 1793014679.7865694,
+    "seen": 1794066353.6064043,
+    "ast_hash": "c81aa90c64a98a0b748ea8cbdc3144d8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SidlCAreaCheckTests.cs": {
+    "mtime": 1793014679.787568,
+    "seen": 1794066353.6064062,
+    "ast_hash": "b7df521aab5377f70e339c35dc6c4282",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SidlCCheckTests.cs": {
+    "mtime": 1793262447.1368804,
+    "seen": 1794066353.6064067,
+    "ast_hash": "5f59c243648e3ee7ead72069608bc737",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SketchFloorTests.cs": {
+    "mtime": 1793698412.9724462,
+    "seen": 1794066353.6064074,
+    "ast_hash": "6322bbd79ad7d8e55e9d1e3450fea0ce",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabBoundaryCharacterizationTests.cs": {
+    "mtime": 1793698815.218801,
+    "seen": 1794066353.6064079,
+    "ast_hash": "b560791e793496f9134e8a179cbe5692",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabCheckInputsTests.cs": {
+    "mtime": 1793615777.4021575,
+    "seen": 1794066353.6064084,
+    "ast_hash": "e6c06da97eb19d3870d5e0760fd5ed28",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabEtabsOpeningTests.cs": {
+    "mtime": 1793014679.7885697,
+    "seen": 1794066353.6064093,
+    "ast_hash": "59162d78a24c4c8e67f011fee0401bca",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabLoadCheckTests.cs": {
+    "mtime": 1793014679.7885697,
+    "seen": 1794066353.6064098,
+    "ast_hash": "4ef57daefd5d7b4d1cfe74e2f0cf4832",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabLoadDumpTests.cs": {
+    "mtime": 1793014679.7893772,
+    "seen": 1794066353.6064103,
+    "ast_hash": "dc90ecfb0c96ec2dc88b7f3763d452e1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabMeshCurvedEdgeTests.cs": {
+    "mtime": 1793014679.7897327,
+    "seen": 1794066353.6064107,
+    "ast_hash": "8cf52d0c1f278d866eb2ca7a377a2beb",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabShellCutTests.cs": {
+    "mtime": 1793014679.7897327,
+    "seen": 1794066353.6064112,
+    "ast_hash": "7aa3436d813b9b6636eaeba77d41ceb5",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabSystemCheckTests.cs": {
+    "mtime": 1793194270.3141444,
+    "seen": 1794066353.6064117,
+    "ast_hash": "b46bf5405500d23cc0c3c6a2d5981368",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SlabZoneReviewTests.cs": {
+    "mtime": 1793014679.7905192,
+    "seen": 1794066353.6064126,
+    "ast_hash": "27fb330500a7414c12574a53253e24f8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SmallZoneCountTests.cs": {
+    "mtime": 1793014679.7905192,
+    "seen": 1794066353.6064131,
+    "ast_hash": "3fa6b7e38cfb5509b689fdfb9db076d3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/StackedShellMeshTests.cs": {
+    "mtime": 1793615750.534588,
+    "seen": 1794066353.6064138,
+    "ast_hash": "e82dbbd4346b3a998887ed830b5f36bd",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/StackedShellTests.cs": {
+    "mtime": 1793014679.7905192,
+    "seen": 1794066353.6064143,
+    "ast_hash": "8d06278dde58e5448bf04e86273a84cb",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/StackedStiffAreaTests.cs": {
+    "mtime": 1793014679.7915406,
+    "seen": 1794066353.606415,
+    "ast_hash": "fa1ef38a8fdf47e85d26daaf1c0ff172",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/SupportInsideSlabTests.cs": {
+    "mtime": 1793014679.7915406,
+    "seen": 1794066353.6064155,
+    "ast_hash": "2ad852eeef8af587ac15336ce2bca7c4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/TabCountTests.cs": {
+    "mtime": 1793014679.7915406,
+    "seen": 1794066353.6064162,
+    "ast_hash": "898e67d5621b458690569e2246d1a88c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/ThickeningDetectionTests.cs": {
+    "mtime": 1794057469.0590296,
+    "seen": 1794066353.606417,
+    "ast_hash": "d7ff2656b90ec86e9d39d54708ce76bf",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/WallCheckTests.cs": {
+    "mtime": 1793014679.7925453,
+    "seen": 1794066353.6064174,
+    "ast_hash": "6c1146e6d2a9ebd66c4356c52b1e29cb",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/WallCornerTests.cs": {
+    "mtime": 1793014679.7925453,
+    "seen": 1794066353.606418,
+    "ast_hash": "5da3c4159bb1e363c1dbe731c27ac92b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.Tests/WallProfileTests.cs": {
+    "mtime": 1793014679.7925453,
+    "seen": 1794066353.6064186,
+    "ast_hash": "393d909ef71cee721e37161b449125e6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner.sln": {
+    "mtime": 1793014679.7935488,
+    "seen": 1794066353.606419,
+    "ast_hash": "7b2c465b2dfefa232018dc7432e6decd",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/CheckOutcome.cs": {
+    "mtime": 1793014679.7945487,
+    "seen": 1794066353.6064198,
+    "ast_hash": "7720164a78428c26be2526a27e56c648",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/CheckSwitches.cs": {
+    "mtime": 1793014679.7945487,
+    "seen": 1794066353.6064205,
+    "ast_hash": "4934d01171f83c5c2156249d6ffc14cd",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/CheckTiming.cs": {
+    "mtime": 1793014679.7945487,
+    "seen": 1794066353.606421,
+    "ast_hash": "477cf50362dbd72c2a54e43ef2e348fc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/ColumnCompareEngine.cs": {
+    "mtime": 1793098277.7113235,
+    "seen": 1794066353.6064215,
+    "ast_hash": "774abb80ec85f7e14dedd433b729bbda",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/ColumnGroupCheck.cs": {
+    "mtime": 1793014679.7955492,
+    "seen": 1794066353.6064222,
+    "ast_hash": "28df0aaf433d6eb934cdbd556bb35205",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/ConstrainedDelaunay.cs": {
+    "mtime": 1794053597.209477,
+    "seen": 1794066353.606423,
+    "ast_hash": "9b74340537e9f8d3cf6969eb6b6dcb2e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/CrossPairEngine.cs": {
+    "mtime": 1793014679.7955492,
+    "seen": 1794066353.6064236,
+    "ast_hash": "2f2df112649d4aa79aa294b216b2c199",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/EndpointCompareEngine.cs": {
+    "mtime": 1793014679.7966156,
+    "seen": 1794066353.606424,
+    "ast_hash": "d560bd41752e119013d7f1db6c7a4f5b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/GeometryDump.cs": {
+    "mtime": 1793014679.7966156,
+    "seen": 1794066353.6064248,
+    "ast_hash": "0f490c1e82527662782be53ead5892ee",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/HeightZones.cs": {
+    "mtime": 1793014679.7966156,
+    "seen": 1794066353.6064253,
+    "ast_hash": "1f075c9c36a150458a3103a0a79e99ce",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/LineLoadCheckInputs.cs": {
+    "mtime": 1793014679.7966156,
+    "seen": 1794066353.606426,
+    "ast_hash": "add3995008c99dd759084ed61a928797",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/LineLoadCompareEngine.cs": {
+    "mtime": 1793194460.3704069,
+    "seen": 1794066353.6064267,
+    "ast_hash": "a329439edcad8cad2ea6475104222360",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/LineLoadResult.cs": {
+    "mtime": 1793014679.7966156,
+    "seen": 1794066353.606428,
+    "ast_hash": "181f30f98e17c4128307b0e982230b6a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/LineLoadRun.cs": {
+    "mtime": 1793014679.7966156,
+    "seen": 1794066353.6064284,
+    "ast_hash": "e9158899a0c9a1e2444fda7ffbbf2e34",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/LoadBand.cs": {
+    "mtime": 1793014679.7993054,
+    "seen": 1794066353.606429,
+    "ast_hash": "a95623c636f717873e657810ec2599dc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/LoadProfile.cs": {
+    "mtime": 1793014679.7993054,
+    "seen": 1794066353.6064296,
+    "ast_hash": "100b20cbbf055b982d6c31fb6d88281c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PairPlace.cs": {
+    "mtime": 1793014679.7993054,
+    "seen": 1794066353.6064305,
+    "ast_hash": "207801ce331ba90cdd59b52c26b4d8c0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PairedColumn.cs": {
+    "mtime": 1793697933.8180885,
+    "seen": 1794066353.606431,
+    "ast_hash": "e1a03c97f3bcfb75a6c3cdc8fa6d0831",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PairedWall.cs": {
+    "mtime": 1793014679.7993054,
+    "seen": 1794066353.6064317,
+    "ast_hash": "5476f353a971e83699d84d6db4c38b5f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PairingOverrides.cs": {
+    "mtime": 1793014679.7993054,
+    "seen": 1794066353.6064322,
+    "ast_hash": "517a1b6e9565020fdc723c4b05d5ca80",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PlanClip.cs": {
+    "mtime": 1793014679.7993054,
+    "seen": 1794066353.606433,
+    "ast_hash": "bb332a0d5fab6e4e783b5d7fae46e9f8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PlanRegionMath.cs": {
+    "mtime": 1793014679.8013096,
+    "seen": 1794066353.6064336,
+    "ast_hash": "e407ca93b98a913b3fb0363c925f317e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/PlanRegionQuick.cs": {
+    "mtime": 1793014679.8013096,
+    "seen": 1794066353.606434,
+    "ast_hash": "d70edaa36adc3d5a206f1deb756428fc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/ResultField.cs": {
+    "mtime": 1793014679.8013096,
+    "seen": 1794066353.6064348,
+    "ast_hash": "70934f60a0db8b1dcca4842649f1adf4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/ReviewNotes.cs": {
+    "mtime": 1793014679.8013096,
+    "seen": 1794066353.6064353,
+    "ast_hash": "97d945b8df0c6390efdca9ef2faadd5d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/RevitLeaveOut.cs": {
+    "mtime": 1793014679.8013096,
+    "seen": 1794066353.6064358,
+    "ast_hash": "3d588ac9e758d4cb4e0b62948cbd95e2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/RunHistory.cs": {
+    "mtime": 1793014679.8013096,
+    "seen": 1794066353.6064363,
+    "ast_hash": "48d6a891b1285640fd13af39a79228a1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SectionExtents.cs": {
+    "mtime": 1793628710.6982138,
+    "seen": 1794066353.6064372,
+    "ast_hash": "ad904ee3af8fc97e7a4aa706b61ac69c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SidlCAreaCompareEngine.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064374,
+    "ast_hash": "bd7acd5fa75ff5dc1cd5afc8b1212de3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SidlCAreaPieces.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064382,
+    "ast_hash": "cb6b0d74c05a0b321e330ec47fd71186",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SlabCheckInputs.cs": {
+    "mtime": 1794057295.828267,
+    "seen": 1794066353.6064386,
+    "ast_hash": "2e791827ad559d9dbfabc7cb64775432",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SlabCompareEngine.cs": {
+    "mtime": 1794057278.674328,
+    "seen": 1794066353.606439,
+    "ast_hash": "6a9280bd7b705df2d122c32a69aeb5ff",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SlabCoverage.cs": {
+    "mtime": 1793698198.1625772,
+    "seen": 1794066353.6064396,
+    "ast_hash": "3ad7c74f77bd1879555e1b2dcd95b4a2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SlabMeshCompare.cs": {
+    "mtime": 1793698198.266832,
+    "seen": 1794066353.6064405,
+    "ast_hash": "7a182a8abd87844c66ab52053947af15",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SlabSupports.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.606441,
+    "ast_hash": "7d39bc7464e83b59f77ff76d33661c05",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/SlabZone.cs": {
+    "mtime": 1793698173.7501092,
+    "seen": 1794066353.6064415,
+    "ast_hash": "f20f40aa2a9361faed6962a897649fa7",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/StackedShells.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.606442,
+    "ast_hash": "99c7439c71f9ac669a43329aaa58239b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/ThickeningDetection.cs": {
+    "mtime": 1794057231.949552,
+    "seen": 1794066353.6064427,
+    "ast_hash": "48c30d1ea6b3f36b693568aeeba74a8c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/TriangleMerge.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064432,
+    "ast_hash": "3fbe390b9346697d0065cd8768ea1ce4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/TwoWayPairing.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.606444,
+    "ast_hash": "665870b9e8f1b0472cdd53ca4288a1a2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Comparison/WallCompareEngine.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064444,
+    "ast_hash": "9142543262bf96c56f9b8cd9a34b62da",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/AreaLoad_E.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.606445,
+    "ast_hash": "848ace3ee40aa5b5d287e5186096674d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/ColumnGeometry.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064458,
+    "ast_hash": "e9146d7e59e8733ef78a722eed71cf69",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Column_e.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.606446,
+    "ast_hash": "850f7e44730da0bc2ee18981149d6362",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Column_r.cs": {
+    "mtime": 1793697899.097584,
+    "seen": 1794066353.6064467,
+    "ast_hash": "ce842cde2a2a73bd43cf2a3d5b910317",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/CompareEngine.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064475,
+    "ast_hash": "d07ce4d7058c5af612a9ad87174b3fe6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/DataContainer.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064482,
+    "ast_hash": "dc814211ee775796346eca9d1337d70d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/EtabsDataContainer.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064487,
+    "ast_hash": "595756e2b5e4b00ec30dd4395781b350",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/EtabsModelFile.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064494,
+    "ast_hash": "da3628391c35afeb82aef87bb0fee330",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/FrameData.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064498,
+    "ast_hash": "3fc75642c1a154a3d93b3cbad594186d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/FrameData_e.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064508,
+    "ast_hash": "4781c11b0f4c1a2fca628df0a35fed72",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/FrameData_r.cs": {
+    "mtime": 1793697899.0231807,
+    "seen": 1794066353.6064513,
+    "ast_hash": "4ce09c2ac82851e9f38ddfc1da0c9054",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/IColumn.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064517,
+    "ast_hash": "2634c8f3af16de675ff35dd7ef1a23f9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/IPlanLine.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064522,
+    "ast_hash": "1ac410a861d0c88dbc24f6c748782395",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/IWall.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.606453,
+    "ast_hash": "55add1b8a40c218b7cf54b70ca31d8c2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/LineLoad_E.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064534,
+    "ast_hash": "a3b331820d71d83cb9bd06ce21e074f1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/LineLoad_R.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064544,
+    "ast_hash": "f4263cabda7ee0bfb25fec2f174c5f1f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/LoadRegion_R.cs": {
+    "mtime": 1793014679.802819,
+    "seen": 1794066353.6064548,
+    "ast_hash": "d304cbc5eaaef41a9431492a505cd565",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/MyPoint.cs": {
+    "mtime": 1793014679.8112123,
+    "seen": 1794066353.6064553,
+    "ast_hash": "6e97948e720307d8b36e7489e5dbc3f0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/MyTransformation.cs": {
+    "mtime": 1793014679.8115857,
+    "seen": 1794066353.606456,
+    "ast_hash": "a78bcbd1d551d285f641fb6eb17c1d96",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/PairedFrame.cs": {
+    "mtime": 1793697934.2148135,
+    "seen": 1794066353.6064565,
+    "ast_hash": "a205d91580a39f8394368cb1077de455",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/ParameterMapping.cs": {
+    "mtime": 1793697788.3363488,
+    "seen": 1794066353.606457,
+    "ast_hash": "f833e38f01da10faa09ec8204076951c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/PlanPolygon.cs": {
+    "mtime": 1793014679.8115857,
+    "seen": 1794066353.6064577,
+    "ast_hash": "259151fd31ad7d85f85e522764c61d0a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/PlanRegions.cs": {
+    "mtime": 1793014679.8115857,
+    "seen": 1794066353.6064584,
+    "ast_hash": "33c2892826474d61df16b1ee475745e9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/PrefrencesData.cs": {
+    "mtime": 1794057250.0295932,
+    "seen": 1794066353.606459,
+    "ast_hash": "acdf9c06857fece23a7b5f38b765483c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/ProjectParameterMappings.cs": {
+    "mtime": 1793698717.3149567,
+    "seen": 1794066353.6064594,
+    "ast_hash": "083bfa82e983b3c74ef1e2f15f2ffc6a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/SectionShape.cs": {
+    "mtime": 1793014679.813196,
+    "seen": 1794066353.60646,
+    "ast_hash": "edfdd46b18ee409bf4c814546a0b7adb",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/SidlCAreaSource_R.cs": {
+    "mtime": 1793014679.813196,
+    "seen": 1794066353.6064606,
+    "ast_hash": "c694dfe0a4dab1b5b2b79b458c79a08b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/SidlCSource_R.cs": {
+    "mtime": 1793014679.813196,
+    "seen": 1794066353.6064613,
+    "ast_hash": "c73640aa75a561e08cb5ccdcd454a1ee",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/SketchFloor.cs": {
+    "mtime": 1793698130.4958887,
+    "seen": 1794066353.6064618,
+    "ast_hash": "cc8e45eb80099034c671ba93d3af3dcc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Slab_E.cs": {
+    "mtime": 1793014679.8142447,
+    "seen": 1794066353.6064625,
+    "ast_hash": "985e273f5237e32e452dc0ac6dcd80c7",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Slab_R.cs": {
+    "mtime": 1794057257.4171283,
+    "seen": 1794066353.606463,
+    "ast_hash": "f4fe0a7e50cbf59af408f79a91a45a5f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Story_E.cs": {
+    "mtime": 1793014679.8142447,
+    "seen": 1794066353.6064634,
+    "ast_hash": "e4def05dbc34dd0c7153a51e2a0a8bd0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/WallCorners.cs": {
+    "mtime": 1793014679.8142447,
+    "seen": 1794066353.6064641,
+    "ast_hash": "4de6903d87dda31b978fec69764aec53",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/WallGeometry.cs": {
+    "mtime": 1793014679.8152528,
+    "seen": 1794066353.6064649,
+    "ast_hash": "7e64abec8adcf9e335cfc1f48e00567b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/WallProfile.cs": {
+    "mtime": 1793014679.8152528,
+    "seen": 1794066353.6064653,
+    "ast_hash": "492a6312d64d64c99bfdd3e1b9415933",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Wall_E.cs": {
+    "mtime": 1793014679.8157406,
+    "seen": 1794066353.606466,
+    "ast_hash": "12e3afa116a7a85c437602d7e4231b3e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DataContainers/Wall_R.cs": {
+    "mtime": 1793014679.8157406,
+    "seen": 1794066353.6064665,
+    "ast_hash": "fecb9b7630ada900f5b9eb1ffe3fd280",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/DiscrepancyScanner.csproj": {
+    "mtime": 1794066300.4551568,
+    "seen": 1794066353.606467,
+    "ast_hash": "4bba475aa6ca06fe8ee00a5e729cce94",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/AreaSectionTables.cs": {
+    "mtime": 1793014679.816748,
+    "seen": 1794066353.6064677,
+    "ast_hash": "4de8e747e1fd41a11cb1f100b841c2ca",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/CsiProduct.cs": {
+    "mtime": 1793014679.816748,
+    "seen": 1794066353.6064684,
+    "ast_hash": "2de81abca1165aa28245bb60afc351d5",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/EtabsEngine.cs": {
+    "mtime": 1793194154.488,
+    "seen": 1794066353.6064692,
+    "ast_hash": "22ebc9d3ec221048452869259fd9760d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/Joint.cs": {
+    "mtime": 1793014679.8177476,
+    "seen": 1794066353.6064696,
+    "ast_hash": "838f11acc0316607abc799b32714442f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/LoadSetTables.cs": {
+    "mtime": 1793014679.818747,
+    "seen": 1794066353.60647,
+    "ast_hash": "eea2419269efc7db8908240badc0109f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/ModelIndex.cs": {
+    "mtime": 1793014679.818747,
+    "seen": 1794066353.6064708,
+    "ast_hash": "bb10b296a9f224fc61f1ca90ac609ee0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/SectionDesignerTables.cs": {
+    "mtime": 1793014679.818747,
+    "seen": 1794066353.6064715,
+    "ast_hash": "7cf12f2eb16d6e10191ac1729ca149e6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Etabs/cPlugin.cs": {
+    "mtime": 1793014679.819747,
+    "seen": 1794066353.606472,
+    "ast_hash": "2e067422f598f6d90f8dd1688386ff45",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Export/BeamMarkExport.cs": {
+    "mtime": 1793014679.819747,
+    "seen": 1794066353.6064727,
+    "ast_hash": "bbf9a211fb0fb0a19e5f048a042d38b8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Export/ExcelWorkbookWriter.cs": {
+    "mtime": 1793014679.819747,
+    "seen": 1794066353.6064732,
+    "ast_hash": "e4310c617bf556527eb554496785b557",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/ActivationForm.cs": {
+    "mtime": 1794066283.8820822,
+    "seen": 1794066353.6064737,
+    "ast_hash": "4922a87131e4ff6b52eebef92d132fe2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/ActivationRequest.cs": {
+    "mtime": 1794066283.9063659,
+    "seen": 1794066353.6064744,
+    "ast_hash": "3dd1ea9c10de706855ebc3116b1d2a77",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/ClockGuard.cs": {
+    "mtime": 1794066283.927884,
+    "seen": 1794066353.606475,
+    "ast_hash": "acabe9c41041c4b6146fc8de934678e2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/EmbeddedKeys.cs": {
+    "mtime": 1794066283.953765,
+    "seen": 1794066353.6064756,
+    "ast_hash": "1f9c874a1bb7a12c74cf6529feef5889",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicenseFile.cs": {
+    "mtime": 1794066283.9737425,
+    "seen": 1794066353.6064763,
+    "ast_hash": "bc22352dcdb7646ced2895d5401f44d9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicenseGate.cs": {
+    "mtime": 1794066283.9948254,
+    "seen": 1794066353.6064768,
+    "ast_hash": "56fa948ed4eb0a5154d7077690fce8dd",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicenseJson.cs": {
+    "mtime": 1794066284.0183535,
+    "seen": 1794066353.6064773,
+    "ast_hash": "55ba79c699774a7592d94223efa29773",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicensePayload.cs": {
+    "mtime": 1794066284.0395877,
+    "seen": 1794066353.606478,
+    "ast_hash": "7baa9527063c26a75bbdcfd695219968",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicenseStore.cs": {
+    "mtime": 1794066284.061936,
+    "seen": 1794066353.6064796,
+    "ast_hash": "ceab066bb161dc8157ad08cf6a3c360d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicenseVerifier.cs": {
+    "mtime": 1794066284.081854,
+    "seen": 1794066353.6064801,
+    "ast_hash": "6630ffe20a3b15fee325898dace3f467",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/LicensingOptions.cs": {
+    "mtime": 1794066284.1012478,
+    "seen": 1794066353.6064808,
+    "ast_hash": "94b48f291147dec751e1421fcf5fd5b0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/MachineFingerprint.cs": {
+    "mtime": 1794066284.122216,
+    "seen": 1794066353.6064813,
+    "ast_hash": "462bb1dd35eefc83c7ed85611b0f96eb",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/RevocationGuard.cs": {
+    "mtime": 1794066284.1423216,
+    "seen": 1794066353.606482,
+    "ast_hash": "ebc054d8c0643580c40d496ed558f8d4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/RevocationList.cs": {
+    "mtime": 1794066284.162151,
+    "seen": 1794066353.6064827,
+    "ast_hash": "5591c8883cdf0873c0fb230967fdc4a9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/Kit/SecretBox.cs": {
+    "mtime": 1794066284.18026,
+    "seen": 1794066353.6064832,
+    "ast_hash": "a241d3884bce4322eaa6ce533f49f17d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Licensing/LicenseInfo.cs": {
+    "mtime": 1794066304.6333199,
+    "seen": 1794066353.6064837,
+    "ast_hash": "b880f3396ffd321a542e4a2fbadef106",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LineLoadHeight.cs": {
+    "mtime": 1793014679.8213017,
+    "seen": 1794066353.6064844,
+    "ast_hash": "62211123341a784602e6fe6ec1d1cd8f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LineLoadPatterns.cs": {
+    "mtime": 1793262411.3212955,
+    "seen": 1794066353.606485,
+    "ast_hash": "e80cbe32a01b38c90d05f47a9c1168cd",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LineLoadSchedule.cs": {
+    "mtime": 1793014679.8213017,
+    "seen": 1794066353.6064856,
+    "ast_hash": "ec8fe81a4434edbf9df77e4c19697cf8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LineLoadScheduleReader.cs": {
+    "mtime": 1793014679.8213017,
+    "seen": 1794066353.606486,
+    "ast_hash": "0f4a1d9ac17da06d4f01b64c65e7edee",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LineLoadStyleSuggestion.cs": {
+    "mtime": 1793014679.822306,
+    "seen": 1794066353.6064868,
+    "ast_hash": "bf90fcfe8a5fe1d9d35e8ef1b924b361",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LineLoadWriteBack.cs": {
+    "mtime": 1793014679.822306,
+    "seen": 1794066353.6064873,
+    "ast_hash": "173a60197033071cb42fed5cc107ca4e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LoadCoverage.cs": {
+    "mtime": 1793014679.822306,
+    "seen": 1794066353.6064878,
+    "ast_hash": "27109ca03033ae543bbaf7ef7f15e534",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LoadLabel.cs": {
+    "mtime": 1793014679.823351,
+    "seen": 1794066353.6064885,
+    "ast_hash": "4aa5ea41439e56aedbb6ee3429544620",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LoadPatternMap.cs": {
+    "mtime": 1793262411.4794405,
+    "seen": 1794066353.6064892,
+    "ast_hash": "1349e04468153cb134d83a0a86d19ba4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LoadSchedule.cs": {
+    "mtime": 1793014679.823351,
+    "seen": 1794066353.6064897,
+    "ast_hash": "bdf1d897a309f98275312993934be2a6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/LoadScheduleReader.cs": {
+    "mtime": 1793014679.823351,
+    "seen": 1794066353.6064904,
+    "ast_hash": "2642bc88d965531495467d79bcde81a4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/ScheduleColumnOverrides.cs": {
+    "mtime": 1793014679.8243506,
+    "seen": 1794066353.6064909,
+    "ast_hash": "4d1697cb3697683a6280ae9492ed1ef1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/ScheduleEdits.cs": {
+    "mtime": 1793014679.8243506,
+    "seen": 1794066353.6064916,
+    "ast_hash": "3eed7ca0bb1f7c3053748bcdcf0e4961",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/ScheduleNames.cs": {
+    "mtime": 1793014679.8243506,
+    "seen": 1794066353.606492,
+    "ast_hash": "1e46e7a094a6156e0eceb314038f8bf5",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/XlsxCellWriter.cs": {
+    "mtime": 1793014679.8243506,
+    "seen": 1794066353.6064928,
+    "ast_hash": "a5859e6477fcc77c5c78afecbbe3dad4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Loads/XlsxWorkbook.cs": {
+    "mtime": 1793014679.825351,
+    "seen": 1794066353.6064935,
+    "ast_hash": "712bd640273427da6c8c3d25ac7ca5b9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Properties/AssemblyInfo.cs": {
+    "mtime": 1793014679.825351,
+    "seen": 1794066353.606494,
+    "ast_hash": "96068187f060bf6b088359f00d93300c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Properties/Resources.Designer.cs": {
+    "mtime": 1793014679.8263514,
+    "seen": 1794066353.6064944,
+    "ast_hash": "05a60571dde6461911fc86a5f2051fd3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/AddinAssemblies.cs": {
+    "mtime": 1793014679.8293507,
+    "seen": 1794066353.606495,
+    "ast_hash": "97dea4611f56cc33b5a906f245caf0be",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/BeamsCheckCommand.cs": {
+    "mtime": 1794066311.1496584,
+    "seen": 1794066353.6064959,
+    "ast_hash": "8a0b7b6209c1235875a85b1989870509",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/ModelCheckCommand.cs": {
+    "mtime": 1794066311.034052,
+    "seen": 1794066353.6064966,
+    "ast_hash": "7eba9e36fb3522bbd43d1a8f6342cbb6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/RevitEngine.ThickeningDetection.cs": {
+    "mtime": 1794057336.581942,
+    "seen": 1794066353.606497,
+    "ast_hash": "095b6a2fe9b90f63fe8d0e975a182913",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/RevitEngine.ThickeningSurvey.cs": {
+    "mtime": 1794055819.6239254,
+    "seen": 1794066353.6064975,
+    "ast_hash": "54c5819aedbb2fe845d41018417623d3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/RevitEngine.cs": {
+    "mtime": 1794057344.726723,
+    "seen": 1794066353.6064982,
+    "ast_hash": "5ea5aea46a6c4ab01836024c872a2837",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Revit/TextHandling.cs": {
+    "mtime": 1793014679.831855,
+    "seen": 1794066353.6064987,
+    "ast_hash": "fdfdab3de73588950d8d9554e3b2d6aa",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/EtabsForm.Designer.cs": {
+    "mtime": 1793014679.8328593,
+    "seen": 1794066353.6064994,
+    "ast_hash": "46c56049bec33813e6a0337e9f4d5ce8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/EtabsForm.cs": {
+    "mtime": 1793014679.8328593,
+    "seen": 1794066353.6065001,
+    "ast_hash": "3de74871bfaf48a75e9aaef1cb175048",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Form1.Designer.cs": {
+    "mtime": 1793014679.8337774,
+    "seen": 1794066353.6065006,
+    "ast_hash": "4c15f5f8ba3d12de5cc81d0384aaa63a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Form1.cs": {
+    "mtime": 1793014679.8337774,
+    "seen": 1794066353.606501,
+    "ast_hash": "2bd60bd1e6abf5cc45c3612add0d02f6",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/GUI.Designer.cs": {
+    "mtime": 1793014679.8337774,
+    "seen": 1794066353.6065016,
+    "ast_hash": "7a6fca0ce9220f63910c7e121dd8e57e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/GUI.cs": {
+    "mtime": 1793014679.8348892,
+    "seen": 1794066353.6065023,
+    "ast_hash": "a7c279164b9a5c572b82022b22b761c0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/ComparasonState.cs": {
+    "mtime": 1793014679.8348892,
+    "seen": 1794066353.606503,
+    "ast_hash": "13e29d759813bad3e336b48adf577e80",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/DrawAble.cs": {
+    "mtime": 1793014679.8348892,
+    "seen": 1794066353.6065035,
+    "ast_hash": "7f2f11de1b6eeb44dd5878989a8ebf4b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/GraphicsExtension.cs": {
+    "mtime": 1793014679.8358884,
+    "seen": 1794066353.6065042,
+    "ast_hash": "ad6ee1b4713f8b549276f102f21e4fa1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/IDrawAble.cs": {
+    "mtime": 1793098263.27011,
+    "seen": 1794066353.6065047,
+    "ast_hash": "16f16a5b7782e0c50b4b9398199db8d2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/MessageType.cs": {
+    "mtime": 1793014679.8358884,
+    "seen": 1794066353.6065052,
+    "ast_hash": "f23009268917ecef88aaf5f32c72e942",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/MyMessage.cs": {
+    "mtime": 1793014679.8358884,
+    "seen": 1794066353.6065059,
+    "ast_hash": "aac6ab7645a3f9a48b4f2ceed0328cdf",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/Graphics/VisabilityController.cs": {
+    "mtime": 1793014679.8368876,
+    "seen": 1794066353.6065066,
+    "ast_hash": "4e1a1edb8f88d4aa16fa34adf9c094f8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/EtabsFrameForm.Designer.cs": {
+    "mtime": 1793014679.8371813,
+    "seen": 1794066353.6065073,
+    "ast_hash": "27fa76c8e958a22daa449bcea4810580",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/EtabsFrameForm.cs": {
+    "mtime": 1793014679.8371813,
+    "seen": 1794066353.6065078,
+    "ast_hash": "d3c6a24737bdc6b9ecd51d607df70bda",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/EtabsIssuesForm.cs": {
+    "mtime": 1793014679.837648,
+    "seen": 1794066353.6065083,
+    "ast_hash": "685cfe5610fbeb2f3659951021397263",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/LinkSelectionForm.cs": {
+    "mtime": 1793014679.8381808,
+    "seen": 1794066353.6065087,
+    "ast_hash": "5cd9f89378ecbc82f957f3eef63e0965",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/PairedFrameForm.Designer.cs": {
+    "mtime": 1793014679.8381808,
+    "seen": 1794066353.6065097,
+    "ast_hash": "11efa8c92b8442645453ad3c9f1fbf02",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/PairedFrameForm.cs": {
+    "mtime": 1793014679.8381808,
+    "seen": 1794066353.6065102,
+    "ast_hash": "d57403237d75107e7fd313741df78a11",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/PrefrencesForm.Designer.cs": {
+    "mtime": 1793014679.8381808,
+    "seen": 1794066353.6065109,
+    "ast_hash": "83d02b36cccb44a67249ce60eadec58e",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/PrefrencesForm.cs": {
+    "mtime": 1793014679.8391864,
+    "seen": 1794066353.6065114,
+    "ast_hash": "73f5623b706951bd9e72ca975c61bf92",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/RevitFrameForm.Designer.cs": {
+    "mtime": 1793014679.8391864,
+    "seen": 1794066353.606512,
+    "ast_hash": "268ec3e87c343afc686d43f097d39fe0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/PopupForms/RevitFrameForm.cs": {
+    "mtime": 1793014679.8391864,
+    "seen": 1794066353.6065125,
+    "ast_hash": "05b5a7c89d5661ca2911603381b60f78",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/TranslationForm.Designer.cs": {
+    "mtime": 1793014679.8401859,
+    "seen": 1794066353.6065133,
+    "ast_hash": "47c893d08090d2f5eb2c565feba3ca6d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/gui/TranslationForm.cs": {
+    "mtime": 1793014679.8401859,
+    "seen": 1794066353.606514,
+    "ast_hash": "c182e56b4d970ec998c7010501eed756",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Rendering/ModelCanvas.cs": {
+    "mtime": 1793014679.8417127,
+    "seen": 1794066353.6065145,
+    "ast_hash": "e15ebdd39184e8355dd22e09a08a545d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Rendering/PlanSnap.cs": {
+    "mtime": 1793014679.8417127,
+    "seen": 1794066353.606515,
+    "ast_hash": "0a36cd06a288af81f03c180dabe92ff8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Rendering/VerdictColours.cs": {
+    "mtime": 1793014679.8417127,
+    "seen": 1794066353.6065154,
+    "ast_hash": "b620c4037ecc5082a79f78d15139bb59",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Rendering/ViewPalette.cs": {
+    "mtime": 1793014679.8427098,
+    "seen": 1794066353.6065161,
+    "ast_hash": "3a2ccf1b2054e737c9b5c42080376338",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/Json.cs": {
+    "mtime": 1793014679.8427098,
+    "seen": 1794066353.6065168,
+    "ast_hash": "77259ea7f8976505034caaaa606a676d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/LoadingPlanLinks.cs": {
+    "mtime": 1793014679.8427098,
+    "seen": 1794066353.6065173,
+    "ast_hash": "fba19d1fc0b7841621c43f097b4edb74",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/ProjectFile.cs": {
+    "mtime": 1793014679.843709,
+    "seen": 1794066353.606518,
+    "ast_hash": "079de22a26f61e1347e4be362b21fa5a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/RevitRequestHandler.cs": {
+    "mtime": 1793014679.843709,
+    "seen": 1794066353.6065185,
+    "ast_hash": "ac2e3b91354212b633aa5307d53d1d38",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/Shortcuts.cs": {
+    "mtime": 1793014679.843709,
+    "seen": 1794066353.6065192,
+    "ast_hash": "fb4f26aa5493dc1e5a3ee5b4750f27f0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/SlabLoadDump.cs": {
+    "mtime": 1793014679.8447092,
+    "seen": 1794066353.6065197,
+    "ast_hash": "937b41c23049dfb55bca195a30372345",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Services/UserSettings.cs": {
+    "mtime": 1793698717.2763386,
+    "seen": 1794066353.6065204,
+    "ast_hash": "a9d7fd178d1fea77e70f1ca5dae6a56c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Theme/Industry.xaml": {
+    "mtime": 1793014679.8516426,
+    "seen": 1794066353.606521,
+    "ast_hash": "69daee55b72e3d9f3992abfce3b011b5",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/AlignmentViewModel.cs": {
+    "mtime": 1793014679.8526464,
+    "seen": 1794066353.6065216,
+    "ast_hash": "3f4b66a6859d0948bbf424f9873f4d23",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/CheckResultFilter.cs": {
+    "mtime": 1793014679.8526464,
+    "seen": 1794066353.606522,
+    "ast_hash": "12f67a1d28ae41f2c68de0b7cc5377ab",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ComparisonViewModel.cs": {
+    "mtime": 1794066311.39843,
+    "seen": 1794066353.6065226,
+    "ast_hash": "52433c58101cbe410b81d73d3e7eda5c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ElementViewModel.cs": {
+    "mtime": 1793014679.855512,
+    "seen": 1794066353.6065233,
+    "ast_hash": "ed836da92fd867af77b3f3096480145a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ElementViewModelFactory.cs": {
+    "mtime": 1793697934.0384514,
+    "seen": 1794066353.606524,
+    "ast_hash": "fdff0bfc4c11acec78689666792c7291",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/FindingTally.cs": {
+    "mtime": 1793014679.8565266,
+    "seen": 1794066353.6065245,
+    "ast_hash": "f1f8be55879d86f27de3a9b7869cc0e0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/Findings.cs": {
+    "mtime": 1793014679.8575265,
+    "seen": 1794066353.6065252,
+    "ast_hash": "48698e9c4e229ee49cb0ac0c02d33743",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ForgetChoices.cs": {
+    "mtime": 1793014679.8575265,
+    "seen": 1794066353.6065257,
+    "ast_hash": "9a9217f300efd5e5324aa2429e677e72",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/HeightZoneRequests.cs": {
+    "mtime": 1793014679.8575265,
+    "seen": 1794066353.6065264,
+    "ast_hash": "f9ffb7567db93ecfa449ddafbe6d26ad",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/LabelFieldOption.cs": {
+    "mtime": 1793014679.8575265,
+    "seen": 1794066353.606527,
+    "ast_hash": "306d56c12762fe12e81c6253f86e1f9d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/LoadPatternsViewModel.cs": {
+    "mtime": 1793014679.8585255,
+    "seen": 1794066353.6065276,
+    "ast_hash": "c5a52df0641f514e7329fea5a41c436f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/LoadingPlanCopyViewModel.cs": {
+    "mtime": 1793014679.859517,
+    "seen": 1794066353.6065283,
+    "ast_hash": "872aa75c44ecc7fed671d854d37c652c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/LoadingPlanGuessViewModel.cs": {
+    "mtime": 1793014679.859517,
+    "seen": 1794066353.606529,
+    "ast_hash": "a1e1472a98eb6d0ddab6d56719dfbe4b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/LoadingPlansViewModel.cs": {
+    "mtime": 1793014679.8605173,
+    "seen": 1794066353.6065295,
+    "ast_hash": "1bd4250bedbfda900d26817acafa1aba",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ModelStatus.cs": {
+    "mtime": 1793014679.8605173,
+    "seen": 1794066353.60653,
+    "ast_hash": "b0dedbef0ea3128cbfb404c3951e3be1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/PairingEditor.cs": {
+    "mtime": 1793014679.8605173,
+    "seen": 1794066353.6065307,
+    "ast_hash": "0a657052c28ef677f418e54eed09c53d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/Preflight.cs": {
+    "mtime": 1793014679.861525,
+    "seen": 1794066353.6065311,
+    "ast_hash": "350c392d967a5af8d689c80dc43c1dca",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/RawElements.cs": {
+    "mtime": 1793014679.861525,
+    "seen": 1794066353.6065319,
+    "ast_hash": "4df15ebeaf1de66d108b5fa5eb0afdc1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ScheduleSheetViewModel.cs": {
+    "mtime": 1793014679.8620439,
+    "seen": 1794066353.6065326,
+    "ast_hash": "955be038bd7e30d0eb52e5dd8ec29d86",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/SettingItem.cs": {
+    "mtime": 1793014679.8620439,
+    "seen": 1794066353.606533,
+    "ast_hash": "b4bb55dcaad8df21e1962af973e53b59",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/SettingsViewModel.cs": {
+    "mtime": 1794057250.1974542,
+    "seen": 1794066353.606534,
+    "ast_hash": "d45832ccfa4893eed36dd1735ec636e1",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/ViewModelBase.cs": {
+    "mtime": 1793014679.8630402,
+    "seen": 1794066353.6065345,
+    "ast_hash": "4fb3b4dfc3b80293cbf50cda5924cd1f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/ViewModels/WallStacks.cs": {
+    "mtime": 1793014679.8630402,
+    "seen": 1794066353.606535,
+    "ast_hash": "ec12fdc2b8455d26297a69ac8d795acb",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/AlignWindow.xaml": {
+    "mtime": 1793014679.8630402,
+    "seen": 1794066353.6065357,
+    "ast_hash": "e1f736ad0adfa0b6396a27a657f41f40",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/AlignWindow.xaml.cs": {
+    "mtime": 1793014679.86404,
+    "seen": 1794066353.6065361,
+    "ast_hash": "c27140b2296c731a0303efa1832125a8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/CheckWindow.xaml": {
+    "mtime": 1793014679.8650477,
+    "seen": 1794066353.6065366,
+    "ast_hash": "0adf97890c0240189e8d0b0f7477782a",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/CheckWindow.xaml.cs": {
+    "mtime": 1793014679.8650477,
+    "seen": 1794066353.6065376,
+    "ast_hash": "56c9f705b5d76e2b1ad10a83bc49f557",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ElementChooserWindow.xaml": {
+    "mtime": 1793014679.8650477,
+    "seen": 1794066353.606538,
+    "ast_hash": "35d36d03c90a45fac3d3c8f9d48edabe",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ElementChooserWindow.xaml.cs": {
+    "mtime": 1793014679.8650477,
+    "seen": 1794066353.6065385,
+    "ast_hash": "5cfc789f24ae4849221dbde1e26a464c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ForgetWindow.xaml": {
+    "mtime": 1793014679.8660479,
+    "seen": 1794066353.6065392,
+    "ast_hash": "89252e2674e81125ce71108f359f0539",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ForgetWindow.xaml.cs": {
+    "mtime": 1793014679.8660479,
+    "seen": 1794066353.6065397,
+    "ast_hash": "44d951cd06b17e5c4022f608496b4894",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/HeightZoneWindow.xaml": {
+    "mtime": 1793014679.8660479,
+    "seen": 1794066353.6065402,
+    "ast_hash": "1059e7a2c90225249548d0d2786ff3b8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/HeightZoneWindow.xaml.cs": {
+    "mtime": 1793014679.8660479,
+    "seen": 1794066353.6065412,
+    "ast_hash": "3c69f82a626706abb4669dce09c5dbb9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/IssueListWindow.xaml": {
+    "mtime": 1793014679.8670473,
+    "seen": 1794066353.6065416,
+    "ast_hash": "17527b03ff22b4a16101fae4830af872",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/IssueListWindow.xaml.cs": {
+    "mtime": 1793014679.8670473,
+    "seen": 1794066353.606542,
+    "ast_hash": "9edc5a11bcb77b56a086160b92daaf92",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LevelsWindow.xaml": {
+    "mtime": 1793014679.8670473,
+    "seen": 1794066353.6065428,
+    "ast_hash": "48a10169b972750364a014fd89d14ed8",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LevelsWindow.xaml.cs": {
+    "mtime": 1793014679.8670473,
+    "seen": 1794066353.6065435,
+    "ast_hash": "460a99a4307e3795a6186c75dcb33137",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadPatternsWindow.xaml": {
+    "mtime": 1793014679.8670473,
+    "seen": 1794066353.606544,
+    "ast_hash": "c1275ba9cfbda85a1eb9ebf51a558afd",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadPatternsWindow.xaml.cs": {
+    "mtime": 1793014679.8680477,
+    "seen": 1794066353.6065447,
+    "ast_hash": "8cc25823952afb76b61caf4c6eb23dcc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadingPlanCopyWindow.xaml": {
+    "mtime": 1793014679.8680477,
+    "seen": 1794066353.6065454,
+    "ast_hash": "e5691d62a6fed0c5f0bf6533a861cca3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadingPlanCopyWindow.xaml.cs": {
+    "mtime": 1793014679.8680477,
+    "seen": 1794066353.606546,
+    "ast_hash": "ff8da89812bb6528db4677e52cf4018b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadingPlanGuessWindow.xaml": {
+    "mtime": 1793014679.8685648,
+    "seen": 1794066353.6065464,
+    "ast_hash": "55d5abc59e14c26a69916da339589ac4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadingPlanGuessWindow.xaml.cs": {
+    "mtime": 1793014679.8685648,
+    "seen": 1794066353.606547,
+    "ast_hash": "859ce0eb6cb4460e13f348a8e140c99d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadingPlansWindow.xaml": {
+    "mtime": 1793014679.8685648,
+    "seen": 1794066353.6065476,
+    "ast_hash": "d1337c3eb93e4f280332f7b1fc38fe4c",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/LoadingPlansWindow.xaml.cs": {
+    "mtime": 1793014679.8685648,
+    "seen": 1794066353.6065483,
+    "ast_hash": "5c05a922b939cd37bb20acbc446e8043",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ModelChooserWindow.xaml": {
+    "mtime": 1793014679.8695698,
+    "seen": 1794066353.606549,
+    "ast_hash": "117c5ade54461f597c95fa190b3570c0",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ModelChooserWindow.xaml.cs": {
+    "mtime": 1793014679.8695698,
+    "seen": 1794066353.6065495,
+    "ast_hash": "f99263f2fc760746607283edd6a687e2",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/NoteWindow.xaml": {
+    "mtime": 1793014679.8695698,
+    "seen": 1794066353.6065502,
+    "ast_hash": "449d49bd065a64daa7011663eee8c8bc",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/NoteWindow.xaml.cs": {
+    "mtime": 1793014679.8695698,
+    "seen": 1794066353.6065507,
+    "ast_hash": "d37d8a54e3bcb077a9a2490eef6cba63",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/PreflightWindow.xaml": {
+    "mtime": 1793014679.8705716,
+    "seen": 1794066353.6065514,
+    "ast_hash": "b0c3e68b3019aaacd8f72a883b700fbe",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/PreflightWindow.xaml.cs": {
+    "mtime": 1793014679.8705716,
+    "seen": 1794066353.6065521,
+    "ast_hash": "ec0e776b03c735cdc31256345f50ae5d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ScheduleSheetWindow.xaml": {
+    "mtime": 1793014679.8710968,
+    "seen": 1794066353.6065526,
+    "ast_hash": "3c4dddfd889a155a4ffa77800576a0f3",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/ScheduleSheetWindow.xaml.cs": {
+    "mtime": 1793014679.8710968,
+    "seen": 1794066353.606553,
+    "ast_hash": "5c1a92761febd745018623f2a50c287f",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/SettingsWindow.xaml": {
+    "mtime": 1793014679.871661,
+    "seen": 1794066353.6065538,
+    "ast_hash": "b7afefe0b49b79690a674668727668c4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Views/SettingsWindow.xaml.cs": {
+    "mtime": 1793014679.871661,
+    "seen": 1794066353.6065543,
+    "ast_hash": "09cfb1865bdc622bd84e2e0f6fc3b5aa",
+    "semantic_hash": ""
+  },
+  "EtabsTextExport/EtabsTextExport.csproj": {
+    "mtime": 1793091590.576902,
+    "seen": 1794066353.606555,
+    "ast_hash": "9288bb6ab1abf8e44650233325a92860",
+    "semantic_hash": ""
+  },
+  "EtabsTextExport/cPlugin.cs": {
+    "mtime": 1793091590.6678524,
+    "seen": 1794066353.6065557,
+    "ast_hash": "028a4f64a65d758b7e3d57cfa0c4b3e9",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/AreaAssignRow.cs": {
+    "mtime": 1793014679.872669,
+    "seen": 1794066353.6065562,
+    "ast_hash": "602cba4168985cf32ff377a5bc164b23",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/EtabsTable.cs": {
+    "mtime": 1793014679.872669,
+    "seen": 1794066353.606557,
+    "ast_hash": "bea49bad4749122e7656885ed255eb77",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/EtabsTextFile.cs": {
+    "mtime": 1793014679.872669,
+    "seen": 1794066353.6065574,
+    "ast_hash": "e0eede8741eb20736818379afc693d07",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/EtabsTextModel.csproj": {
+    "mtime": 1793014679.872669,
+    "seen": 1794066353.6065583,
+    "ast_hash": "5326a98341e1c0819a5880f0529ad492",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/EtabsTextTables.cs": {
+    "mtime": 1793014679.873752,
+    "seen": 1794066353.6065588,
+    "ast_hash": "ff6305ffe231b99cfdaf2f8cb7af29a5",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/LoadSetRows.cs": {
+    "mtime": 1793014679.873752,
+    "seen": 1794066353.6065593,
+    "ast_hash": "935adceb5337fad6bf6d131b57cb6813",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/ModelUnits.cs": {
+    "mtime": 1793014679.873752,
+    "seen": 1794066353.60656,
+    "ast_hash": "bb8d1012054bc00b1c1162551bdac4b7",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/Properties/AssemblyInfo.cs": {
+    "mtime": 1793014679.873752,
+    "seen": 1794066353.6065605,
+    "ast_hash": "ad39c80252061aebd0f0764bfed68274",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/SectionScan.cs": {
+    "mtime": 1793014679.873752,
+    "seen": 1794066353.6065612,
+    "ast_hash": "d14a3917cbccca2958005fff01dca6a5",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/StringPool.cs": {
+    "mtime": 1793014679.8747594,
+    "seen": 1794066353.606562,
+    "ast_hash": "6353833a6fc0db0e0926ce79b4b57724",
+    "semantic_hash": ""
+  },
+  "EtabsTextModel/TextLine.cs": {
+    "mtime": 1793014679.8747594,
+    "seen": 1794066353.6065626,
+    "ast_hash": "0b5cfc15b60fdc3eed4387d696abdaf8",
+    "semantic_hash": ""
+  },
+  "tools/Check-CsiAttach.ps1": {
+    "mtime": 1793014679.8767593,
+    "seen": 1794066353.606563,
+    "ast_hash": "cbfa9fac8f10c6a89b3055a3387c67e6",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1793697000.181591,
+    "seen": 1794066353.6065636,
+    "ast_hash": "2a9c08d8e3f449ecad4b0fcb7c9d08a4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/wpf/Theme/Fonts/OFL.txt": {
+    "mtime": 1793014679.8516426,
+    "seen": 1794066353.6065643,
+    "ast_hash": "122e423cff745827b92ca5219c3e6b79",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1793014900.9026945,
+    "seen": 1794066353.6065652,
+    "ast_hash": "0ffbc3c1ad172ebbab4a28d70e05b332",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/Check .png": {
+    "mtime": 1793014679.8263514,
+    "seen": 1794066353.6065657,
+    "ast_hash": "4073edcb74fddcaecaf9b2045ceffd01",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/Untitled.png": {
+    "mtime": 1793014679.8273509,
+    "seen": 1794066353.6065662,
+    "ast_hash": "88065041c2510dfea701a4e167819870",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/eye 30.png": {
+    "mtime": 1793014679.8273509,
+    "seen": 1794066353.606567,
+    "ast_hash": "2a024f1535367070a90f34d9c61bed1b",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/icons8-hide-30.png": {
+    "mtime": 1793014679.8273509,
+    "seen": 1794066353.6065674,
+    "ast_hash": "15703dacc8e96f3a35799e2762b5a6c7",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/icons8-hide-60.png": {
+    "mtime": 1793014679.8273509,
+    "seen": 1794066353.6065679,
+    "ast_hash": "4b9c0816238a7699a49cf76c99dacbae",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/setting.png": {
+    "mtime": 1793014679.8283508,
+    "seen": 1794066353.6065688,
+    "ast_hash": "f8f6e2f31fb4e24af4521a95f7acff1d",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/zoom_fit_icon.png": {
+    "mtime": 1793014679.8283508,
+    "seen": 1794066353.6065693,
+    "ast_hash": "7a1040e44e5312a0f31ef62f0ca0b067",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/zoom_in_icon.png": {
+    "mtime": 1793014679.8283508,
+    "seen": 1794066353.60657,
+    "ast_hash": "5af21fe149ca4197bb24616e23cfdef4",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/zoom_out_icon.png": {
+    "mtime": 1793014679.8283508,
+    "seen": 1794066353.6065705,
+    "ast_hash": "83db42709892afbeec83b7b0170394f9",
+    "semantic_hash": ""
+  },
+  "DiscrepancyScanner/Resources/zoom_wind_icon.png": {
+    "mtime": 1793014679.8293507,
+    "seen": 1794066353.606571,
+    "ast_hash": "c98a8e4e98265eb984d745f36f44d1cd",
+    "semantic_hash": ""
+  }
+}
