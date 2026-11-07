@@ -1,0 +1,119 @@
+<Window x:Class="DiscrepancyScanner.Wpf.ScheduleSheetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Loading schedule"
+        Height="720" Width="1100" MinHeight="420" MinWidth="720"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ColorBg}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/Industry.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="ShowWhenTrue" />
+
+            <Style TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+                <Setter Property="MinWidth" Value="86" />
+            </Style>
+
+            <!-- the key under the heading: one swatch and what it means -->
+            <Style x:Key="Swatch" TargetType="Border">
+                <Setter Property="Width" Value="14" />
+                <Setter Property="Height" Value="14" />
+                <Setter Property="BorderBrush" Value="#FFBBBBBB" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Margin" Value="0,0,6,0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel>
+
+        <!-- which workbook, which sheet, and what the colours say -->
+        <Border DockPanel.Dock="Top" Background="{StaticResource ColorBg}" Padding="18,12"
+                BorderBrush="{StaticResource ColorBorder}" BorderThickness="0,0,0,1">
+            <StackPanel>
+                <TextBlock Text="LOADING SCHEDULE" Style="{StaticResource BrandText}" />
+                <TextBlock Style="{StaticResource CaptionText}" Margin="0,2,0,0" TextWrapping="Wrap"
+                           Text="The sheet as the check reads it. The coloured columns are the ones it takes each value from - right-click a column's heading to say otherwise. Double click a cell to change it; when you save, you are asked whether the change goes into the Excel workbook or stays in this tool only." />
+
+                <TextBlock Text="{Binding ReadAs}" Margin="0,8,0,0" TextWrapping="Wrap"
+                           FontWeight="SemiBold" Foreground="#FF2C455D" />
+
+                <DockPanel Margin="0,10,0,0">
+                    <TextBlock Text="Sheet" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,8,0" />
+                    <ComboBox ItemsSource="{Binding Sheets}" SelectedItem="{Binding SelectedSheet}"
+                              MinWidth="220" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding WorkbookName}" VerticalAlignment="Center" Margin="14,0,0,0"
+                               Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis"
+                               ToolTip="{Binding WorkbookPath}" />
+
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Border Style="{StaticResource Swatch}" Background="#FFFFE2A8" />
+                        <TextBlock Text="not saved" Style="{StaticResource CaptionText}" VerticalAlignment="Center"
+                                   Margin="0,0,14,0" />
+                        <Border Style="{StaticResource Swatch}" Background="#FFD6EBFF" />
+                        <TextBlock Text="in the tool only" Style="{StaticResource CaptionText}" VerticalAlignment="Center"
+                                   Margin="0,0,14,0" />
+                        <Border Style="{StaticResource Swatch}" Background="#FFEDEDED" />
+                        <TextBlock Text="formula - edit in Excel" Style="{StaticResource CaptionText}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- what has changed, and where it can go -->
+        <Border DockPanel.Dock="Bottom" Background="{StaticResource ColorSurface}" Padding="18,10"
+                BorderBrush="#FFCCCCCC" BorderThickness="0,1,0,0">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="CLOSE" IsCancel="True" Click="OnCloseClick"
+                        Margin="10,0,0,0" />
+                <Button DockPanel.Dock="Right" Content="SAVE..." Style="{StaticResource PrimaryButton}"
+                        Command="{Binding SaveCommand}" FontWeight="SemiBold" MinWidth="96"
+                        ToolTip="Save the changes - you are asked whether into the workbook or into this tool only." />
+                <Button DockPanel.Dock="Right" Content="Undo unsaved" Command="{Binding RevertCommand}"
+                        Margin="0,0,10,0" />
+                <Button DockPanel.Dock="Right" Content="Forget tool-only changes" Command="{Binding DiscardKeptCommand}"
+                        Margin="0,0,10,0" MinWidth="170"
+                        ToolTip="Stop reading this sheet with the changes kept in the tool, so it reads as the workbook has it." />
+                <Button DockPanel.Dock="Left" Content="Open in Excel" Command="{Binding OpenInExcelCommand}"
+                        Margin="0,0,10,0" />
+                <Button DockPanel.Dock="Left" Content="Columns by headings" Command="{Binding ResetColumnsCommand}"
+                        Margin="0,0,10,0" MinWidth="140"
+                        ToolTip="Forget what the columns of this sheet were said by hand to hold, and read them from the headings again." />
+                <Button DockPanel.Dock="Left" Content="Reload" Command="{Binding ReloadCommand}"
+                        Margin="0,0,14,0"
+                        ToolTip="Read the workbook again - after changing it in Excel, say." />
+                <TextBlock Text="{Binding Summary}" VerticalAlignment="Center" TextWrapping="Wrap"
+                           Margin="0,0,12,0" />
+            </DockPanel>
+        </Border>
+
+        <Grid Margin="18,12">
+            <TextBlock Text="{Binding Problem}" Foreground="#FFB30F14" TextWrapping="Wrap"
+                       Visibility="{Binding HasProblem, Converter={StaticResource ShowWhenTrue}}" />
+
+            <!--
+                Columns are laid out from the code behind, one per column of the sheet, because
+                how many there are is only known once the sheet is read.
+            -->
+            <DataGrid x:Name="grid" ItemsSource="{Binding Rows}"
+                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                      CanUserSortColumns="False" CanUserReorderColumns="False"
+                      SelectionUnit="Cell" SelectionMode="Extended"
+                      HeadersVisibility="Column" FrozenColumnCount="1"
+                      EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                      VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                      GridLinesVisibility="All"
+                      HorizontalGridLinesBrush="#FFE0E0E0" VerticalGridLinesBrush="#FFE0E0E0"
+                      Background="White" RowBackground="White" AlternatingRowBackground="White"
+                      BorderBrush="{StaticResource ColorBorder}"
+                      FontSize="12" RowHeight="22"
+                      BeginningEdit="OnBeginningEdit" />
+        </Grid>
+    </DockPanel>
+</Window>

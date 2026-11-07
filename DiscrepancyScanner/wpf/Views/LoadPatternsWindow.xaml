@@ -1,0 +1,193 @@
+<Window x:Class="DiscrepancyScanner.Wpf.LoadPatternsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Load patterns"
+        Height="760" Width="1060" MinHeight="520" MinWidth="820"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ColorBg}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/Industry.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="ShowWhenTrue" />
+
+            <Style x:Key="FieldLabel" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#FF555555" />
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="LoadName" TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,4,10,4" />
+            </Style>
+
+            <Style x:Key="Names" TargetType="TextBox">
+                <Setter Property="Padding" Value="4,3" />
+                <Setter Property="Margin" Value="0,3,12,3" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel>
+
+        <Border DockPanel.Dock="Top" Background="{StaticResource ColorBg}" Padding="18,12"
+                BorderBrush="{StaticResource ColorBorder}" BorderThickness="0,0,0,1">
+            <StackPanel>
+                <TextBlock Text="LOAD PATTERNS" Style="{StaticResource BrandText}" />
+                <TextBlock Style="{StaticResource CaptionText}" Margin="0,2,0,0" TextWrapping="Wrap"
+                           Text="Which ETABS load pattern is which load of the loading plan, and what the Excel schedule calls each of them. Names are comma separated and matched ignoring case, spaces and dashes. Nothing changes until OK." />
+            </StackPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Bottom" Background="{StaticResource ColorSurface}" Padding="18,10"
+                BorderBrush="#FFCCCCCC" BorderThickness="0,1,0,0">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="CANCEL" IsCancel="True" MinWidth="90" Margin="8,0,0,0"
+                        Style="{StaticResource SecondaryButton}" />
+                <Button DockPanel.Dock="Right" Content="OK" IsDefault="True" MinWidth="90" Click="OnOkClick"
+                        Style="{StaticResource PrimaryButton}" FontWeight="SemiBold" />
+                <TextBlock Text="{Binding Summary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+            </DockPanel>
+        </Border>
+
+        <Grid Margin="18,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" MinHeight="160" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="The patterns in this ETABS model" FontWeight="Bold" Margin="0,0,0,6" />
+
+            <!-- every pattern the imported model loads in, and what each is read as -->
+            <Grid Grid.Row="1">
+                <DataGrid ItemsSource="{Binding Rows}" AutoGenerateColumns="False"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                          HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow"
+                          GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFE6E6E6"
+                          Background="White" RowHeight="28" BorderBrush="{StaticResource ColorBorder}"
+                          Visibility="{Binding HasPatterns, Converter={StaticResource ShowWhenTrue}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ETABS pattern" Binding="{Binding Name}" IsReadOnly="True"
+                                            Width="180" FontWeight="SemiBold" />
+                        <DataGridTextColumn Header="Shells" Binding="{Binding Shells}" IsReadOnly="True" Width="60" />
+                        <DataGridTextColumn Header="Frames" Binding="{Binding Frames}" IsReadOnly="True" Width="60" />
+
+                        <DataGridTemplateColumn Header="Area loads read as" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Choices}" DisplayMemberPath="Name"
+                                              SelectedItem="{Binding AreaChoice, UpdateSourceTrigger=PropertyChanged}"
+                                              Margin="2" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Line load SIDL" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding LineRead, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              ToolTip="Read loads in this pattern on the ETABS frames as the line load schedule's SIDL." />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="How" Binding="{Binding Note}" IsReadOnly="True" Width="*"
+                                            Foreground="#FF666666" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock Style="{StaticResource FieldLabel}" VerticalAlignment="Top"
+                           Visibility="{Binding HasNoPatterns, Converter={StaticResource ShowWhenTrue}}"
+                           Text="No load patterns to list yet. Import the ETABS model with the load check (or the line load check) switched on, and every pattern its shells and frames are loaded in shows here to be mapped. The names below can be typed in the meantime." />
+            </Grid>
+
+            <!-- the two halves of the mapping, one load of the loading plan a row -->
+            <TextBlock Grid.Row="2" Text="What each load is called" FontWeight="Bold" Margin="0,16,0,6" />
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="In ETABS, patterns named" Style="{StaticResource FieldLabel}" />
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="In the Excel schedule, called" Style="{StaticResource FieldLabel}" />
+
+                <!-- SIDL -->
+                <TextBlock Grid.Row="1" Text="SIDL (area)" Style="{StaticResource LoadName}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Names}"
+                         Text="{Binding SdlNames, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="heading" Style="{StaticResource FieldLabel}" Margin="0,0,6,0" />
+                <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource Names}"
+                         Text="{Binding SidlHeading, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="What the schedule heads its superimposed dead load with - the breakdown band on the area sheet, the value column on the line load sheet. A heading that starts with any of these matches." />
+
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="total column" Style="{StaticResource FieldLabel}" Margin="0,0,6,0" />
+                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource Names}"
+                         Text="{Binding TotalHeading, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="The area schedule column the SIDL total is read from." />
+
+                <!-- the live loads -->
+                <TextBlock Grid.Row="3" Text="Live (LL)" Style="{StaticResource LoadName}" />
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Names}"
+                         Text="{Binding LiveNames, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="marked" Style="{StaticResource FieldLabel}" Margin="0,0,6,0" />
+                <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource Names}"
+                         Text="{Binding LiveMarking, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="How the schedule's LL column marks plain live load. A blank, or a marking none of the three rows names, is read as this." />
+
+                <TextBlock Grid.Row="4" Text="Reducible live (LR)" Style="{StaticResource LoadName}" />
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Names}"
+                         Text="{Binding ReducibleNames, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Row="4" Grid.Column="2" Text="marked" Style="{StaticResource FieldLabel}" Margin="0,0,6,0" />
+                <TextBox Grid.Row="4" Grid.Column="3" Style="{StaticResource Names}"
+                         Text="{Binding ReducibleMarking, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Grid.Row="5" Text="Mechanical (MEP)" Style="{StaticResource LoadName}" />
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Names}"
+                         Text="{Binding MepNames, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Row="5" Grid.Column="2" Text="marked" Style="{StaticResource FieldLabel}" Margin="0,0,6,0" />
+                <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource Names}"
+                         Text="{Binding MepMarking, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Grid.Row="6" Grid.Column="2" Text="live load column" Style="{StaticResource FieldLabel}" Margin="0,0,6,0" />
+                <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource Names}"
+                         Text="{Binding LiveHeading, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="The area schedule column the live load value is read from." />
+
+                <!-- line loads, and the patterns nothing reads -->
+                <TextBlock Grid.Row="6" Text="Line load SIDL" Style="{StaticResource LoadName}" />
+                <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource Names}"
+                         Text="{Binding LineNames, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="The patterns on the ETABS frames the line load check reads. Empty reads every pattern. On the schedule, its value column is headed like the SIDL above, or LOAD ON ELEVATION." />
+
+                <TextBlock Grid.Row="7" Text="Never counted" Style="{StaticResource LoadName}" />
+                <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource Names}"
+                         Text="{Binding NeverNames, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="Patterns neither check reads, however the lists above would catch them - SIDL_C, with SIDL inside its name, is the usual one." />
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

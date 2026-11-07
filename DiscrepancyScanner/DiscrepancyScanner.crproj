@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ConfuserEx obfuscation - Discrepancy Scanner (Revit 2025 add-in, .NET 4.7.2 DLL)
+  ================================================================================
+    1) Build:      MSBuild DiscrepancyScanner.csproj -t:Build -p:Configuration=Release
+    2) Obfuscate:  Confuser.CLI.exe -n DiscrepancyScanner.crproj
+       Output  ->  bin\Release\Obfuscated\DiscrepancyScanner.dll
+
+  Normally run by ..\..\SRV\Installer\rebuild-all.ps1, which then embeds the obfuscated DLL
+  (plus EtabsTextModel.dll, CSiAPIv1.dll and the package DLLs beside it) in Install.cmd.
+
+  Protections follow the Slab Reinforcement add-in (see ..\..\SRV\SlabReinforcement.crproj):
+  anti ildasm + constants + ctrl flow on every method. No anti tamper and no packer - both look
+  like a malware unpacker to AV/EDR, and anti tamper can stop Revit loading the add-in.
+
+  There is no rename: everything in this DLL is WPF, XAML names its view models, converters and
+  properties by string, and a renamed one breaks the window with no error until it is opened.
+  Revit must also find DiscrepancyScanner.BeamsCheckCommand and ModelCheckCommand by name (the
+  .addin manifest names them).
+-->
+<project outputDir="Obfuscated" baseDir="bin\Release"
+         xmlns="http://confuser.codeplex.com">
+
+  <module path="DiscrepancyScanner.dll">
+    <rule pattern="true" preset="none" inherit="false">
+      <protection id="anti ildasm" />
+      <protection id="constants" />
+      <protection id="ctrl flow" />
+    </rule>
+  </module>
+
+  <!-- ConfuserEx must resolve the Revit API assemblies (they are NOT copied to bin - Private=False
+       in the csproj). CSiAPIv1.dll, EtabsTextModel.dll and the package DLLs sit in baseDir, so
+       they need no probePath. <probePath> MUST come after <module> - the .crproj schema fixes the
+       child order (see ..\..\SRV\SlabReinforcement.crproj). -->
+  <probePath>C:\Program Files\Autodesk\Revit 2025</probePath>
+</project>

@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The ETABS plugin that writes the design model file (.json) the Discrepancy Scanner opens
+    with "read from a saved file" - so a check can run in Revit with no ETABS open.
+
+    ETABS 22 runs on .NET 8, so this targets net8.0-windows - not .NET Framework like the
+    Revit add-in. ETABS finds the plugin by looking for a class named cPlugin in the namespace
+    typed as "Plugin Name" in Tools > Add/Show Plug-Ins, so that name must be EtabsTextExport.
+
+    The reading and the file format are not repeated here: this calls the add-in's own
+    EtabsEngine and EtabsModelFile, so the file is exactly what the Revit side would save.
+    Build the DiscrepancyScanner project first.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>disable</Nullable>
+    <RootNamespace>EtabsTextExport</RootNamespace>
+    <AssemblyName>EtabsTextExport</AssemblyName>
+    <EtabsVersion Condition=" '$(EtabsVersion)' == '' ">22</EtabsVersion>
+    <EtabsDir Condition=" '$(EtabsDir)' == '' ">$(ProgramW6432)\Computers and Structures\ETABS $(EtabsVersion)</EtabsDir>
+    <ScannerConfiguration Condition=" '$(ScannerConfiguration)' == '' ">Debug</ScannerConfiguration>
+    <ScannerDir Condition=" '$(ScannerDir)' == '' ">$(MSBuildProjectDirectory)\..\DiscrepancyScanner\bin\$(ScannerConfiguration)</ScannerDir>
+    <!-- DiscrepancyScanner.dll is a .NET Framework assembly; .NET 8 loads it, so say so once. -->
+    <NoWarn>$(NoWarn);NU1702;MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- ETABS already has its own API assemblies loaded; copies beside the plugin would only conflict. -->
+    <Reference Include="ETABSv1">
+      <HintPath>$(EtabsDir)\ETABSv1.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CSiAPIv1">
+      <HintPath>$(EtabsDir)\CSiAPIv1.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- The add-in's reader and file format, copied beside the plugin. -->
+    <Reference Include="DiscrepancyScanner">
+      <HintPath>$(ScannerDir)\DiscrepancyScanner.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EtabsTextModel">
+      <HintPath>$(ScannerDir)\EtabsTextModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,345 @@
+﻿<!--
+    The Industry design system, as WPF resources.
+
+    This is a transcription of _ds/industry/styles.css, not a reinterpretation of it: every
+    colour, size and spacing here is the value that stylesheet carries, so the two can be read
+    side by side. The web sheet builds its ramps in OKLCH and mixes with color-mix(); WPF can do
+    neither, so the ramps are written out as the hex the browser resolves them to, and every
+    color-mix() is resolved to a flat ARGB with the alpha the mix implies. Retune the stylesheet
+    and these have to be brought back into step by hand - there is no build step between them.
+
+    Naming follows the CSS custom properties: the CSS var color-accent-600 is ColorAccent600, so a rule in
+    the design maps to a resource key without a lookup table.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ==================================================================
+         Fonts
+
+         Embedded rather than assumed: a Revit box has neither Barlow family
+         installed, and the whole layout is measured against a condensed
+         heading face. The trailing "./Fonts/#Family" form is what WPF wants
+         for a font packed as a resource in this assembly.
+         ================================================================== -->
+    <FontFamily x:Key="FontHeading">./Fonts/#Barlow Condensed</FontFamily>
+    <FontFamily x:Key="FontBody">./Fonts/#Barlow</FontFamily>
+
+    <!-- ==================================================================
+         Colour
+
+         A light ground with a single steel accent. The neutral and accent
+         ramps share one perceptual lightness scale, so the same step of
+         either has the same visual weight - 300 against 300 reads level.
+         ================================================================== -->
+
+    <Color x:Key="ColorBgValue">#FFF2F2F3</Color>
+    <SolidColorBrush x:Key="ColorBg" Color="{StaticResource ColorBgValue}" />
+    <SolidColorBrush x:Key="ColorSurface" Color="#FFE9E9EA" />
+    <SolidColorBrush x:Key="ColorText" Color="#FF1D1F20" />
+    <SolidColorBrush x:Key="ColorAccent" Color="#FF5980A6" />
+
+    <!-- color-mix of #1d1f20 at 16 percent -->
+    <SolidColorBrush x:Key="ColorDivider" Color="#291D1F20" />
+    <!-- the heavier frame the design puts round a floating card: 22% and 40% of the ink -->
+    <SolidColorBrush x:Key="ColorBorder" Color="#381D1F20" />
+    <SolidColorBrush x:Key="ColorBorderStrong" Color="#661D1F20" />
+    <!-- .text-muted, and the corner registration marks at 55% -->
+    <SolidColorBrush x:Key="ColorTextMuted" Color="#8C1D1F20" />
+
+    <SolidColorBrush x:Key="ColorNeutral100" Color="#FFF5F5F8" />
+    <SolidColorBrush x:Key="ColorNeutral200" Color="#FFE7E7EA" />
+    <SolidColorBrush x:Key="ColorNeutral300" Color="#FFD4D4D7" />
+    <SolidColorBrush x:Key="ColorNeutral400" Color="#FFB7B7BA" />
+    <SolidColorBrush x:Key="ColorNeutral500" Color="#FF98989B" />
+    <SolidColorBrush x:Key="ColorNeutral600" Color="#FF7A7A7D" />
+    <SolidColorBrush x:Key="ColorNeutral700" Color="#FF5D5D60" />
+    <SolidColorBrush x:Key="ColorNeutral800" Color="#FF424244" />
+    <SolidColorBrush x:Key="ColorNeutral900" Color="#FF2B2B2D" />
+
+    <SolidColorBrush x:Key="ColorAccent100" Color="#FFEEF6FF" />
+    <SolidColorBrush x:Key="ColorAccent200" Color="#FFD6EBFF" />
+    <SolidColorBrush x:Key="ColorAccent300" Color="#FFB5D9FD" />
+    <SolidColorBrush x:Key="ColorAccent400" Color="#FF94BCE3" />
+    <SolidColorBrush x:Key="ColorAccent500" Color="#FF749DC4" />
+    <SolidColorBrush x:Key="ColorAccent600" Color="#FF597EA3" />
+    <SolidColorBrush x:Key="ColorAccent700" Color="#FF416180" />
+    <SolidColorBrush x:Key="ColorAccent800" Color="#FF2C455D" />
+    <SolidColorBrush x:Key="ColorAccent900" Color="#FF1D2D3D" />
+
+    <!--
+        The verdict colours. These are not the design system's - they are the canvas's own, from
+        ViewPalette, and the redesign uses them unchanged so a swatch beside a switch and the
+        element it controls are the same colour. They live here so the chrome can show a verdict
+        without reaching into the rendering code. These are the defaults, the same as
+        VerdictColours holds: a colour somebody picks off the key is put over them on the
+        window at run time, so change a default there and change it here.
+    -->
+    <SolidColorBrush x:Key="VerdictPassed" Color="#FF1EA84C" />
+    <SolidColorBrush x:Key="VerdictFailed" Color="#FFD61F26" />
+    <SolidColorBrush x:Key="VerdictReview" Color="#FFE8820C" />
+    <SolidColorBrush x:Key="VerdictEtabsOnly" Color="#FF981057" />
+    <SolidColorBrush x:Key="VerdictRevitOnly" Color="#FF6621B1" />
+    <SolidColorBrush x:Key="VerdictAccepted" Color="#FF5980A6" />
+
+    <!-- interaction tints: color-mix of the ink and the accent at the steps the sheet uses -->
+    <SolidColorBrush x:Key="TintHover" Color="#121D1F20" />
+    <SolidColorBrush x:Key="TintPressed" Color="#241D1F20" />
+    <SolidColorBrush x:Key="TintAccentHover" Color="#1A5980A6" />
+    <SolidColorBrush x:Key="TintAccentPressed" Color="#2E5980A6" />
+    <SolidColorBrush x:Key="TintSelection" Color="#4D5980A6" />
+
+    <!-- ==================================================================
+         Spacing and radius
+
+         Density 0.85x is already baked into the scale, which is why these
+         are not round numbers. Use them rather than typing a px value the
+         scale already carries.
+         ================================================================== -->
+    <system:Double xmlns:system="clr-namespace:System;assembly=mscorlib" x:Key="Space1">3.4</system:Double>
+    <system:Double xmlns:system="clr-namespace:System;assembly=mscorlib" x:Key="Space2">6.8</system:Double>
+    <system:Double xmlns:system="clr-namespace:System;assembly=mscorlib" x:Key="Space3">10.2</system:Double>
+    <system:Double xmlns:system="clr-namespace:System;assembly=mscorlib" x:Key="Space4">13.6</system:Double>
+    <system:Double xmlns:system="clr-namespace:System;assembly=mscorlib" x:Key="Space6">20.4</system:Double>
+    <system:Double xmlns:system="clr-namespace:System;assembly=mscorlib" x:Key="Space8">27.2</system:Double>
+
+    <CornerRadius x:Key="RadiusSm">2</CornerRadius>
+    <CornerRadius x:Key="RadiusMd">4</CornerRadius>
+    <CornerRadius x:Key="RadiusLg">7</CornerRadius>
+
+    <!-- Elevation, tinted with the ink rather than pure black, as the sheet has it. -->
+    <DropShadowEffect x:Key="ShadowSm" BlurRadius="2" ShadowDepth="1" Direction="270"
+                      Color="#FF2B2B2D" Opacity="0.14" />
+    <DropShadowEffect x:Key="ShadowMd" BlurRadius="10" ShadowDepth="3" Direction="270"
+                      Color="#FF2B2B2D" Opacity="0.16" />
+    <DropShadowEffect x:Key="ShadowLg" BlurRadius="32" ShadowDepth="12" Direction="270"
+                      Color="#FF2B2B2D" Opacity="0.22" />
+
+    <!-- ==================================================================
+         Type
+
+         Barlow Condensed for headings over Barlow for body, at the sizes the
+         design's screens actually use rather than the whole web scale - the
+         h1/h2 end of it has no place in a tool window.
+         ================================================================== -->
+
+    <Style x:Key="BodyText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontBody}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{StaticResource ColorText}" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+    </Style>
+
+    <!-- The muted note under a control. 11px in the design. -->
+    <Style x:Key="CaptionText" TargetType="TextBlock" BasedOn="{StaticResource BodyText}">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Foreground" Value="{StaticResource ColorTextMuted}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--
+        The uppercase letterspaced label the design puts over every region - "CHECKING",
+        "LEVELS", "CHECK". WPF has no letter-spacing, so the tracking is faked where it matters
+        by the caller; here it is the family, weight and size that carry it.
+    -->
+    <Style x:Key="SectionLabel" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontHeading}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{StaticResource ColorNeutral700}" />
+    </Style>
+
+    <Style x:Key="HeadingText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontHeading}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{StaticResource ColorText}" />
+    </Style>
+
+    <!-- The window's own name in the header bar. -->
+    <Style x:Key="BrandText" TargetType="TextBlock" BasedOn="{StaticResource HeadingText}">
+        <Setter Property="FontSize" Value="19" />
+    </Style>
+
+    <!-- ==================================================================
+         The blueprint frame
+
+         The one repeated motif: a square hairline box with a "+" registration
+         mark at each corner, drawn outside the box. Everything framed in the
+         design wears it, so it is a single Style rather than four glyphs
+         placed by hand forty times.
+
+         BlueprintCard is the decoration on its own; put it on a Border and
+         the marks come with it.
+         ================================================================== -->
+
+    <!--
+        A ContentControl rather than a Border: Border is not a Control and so carries no
+        Template to put the marks in. Everything else about it reads the same at the call site -
+        Background, BorderBrush, Padding and a single child.
+    -->
+    <Style x:Key="BlueprintCard" TargetType="ContentControl">
+        <Setter Property="Background" Value="{StaticResource ColorBg}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ColorBorderStrong}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Margin" Value="6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <!--
+                        The marks sit 6px outside the frame, which is why the style carries a
+                        margin: without it they would be clipped by whatever the card is in.
+                        The Canvas is unclipped for the same reason.
+                    -->
+                    <Grid ClipToBounds="False">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter />
+                        </Border>
+
+                        <Canvas ClipToBounds="False" IsHitTestVisible="False">
+                            <Canvas.Resources>
+                                <!-- one registration mark: an 11px cross, hairline, at 55% ink -->
+                                <ControlTemplate x:Key="Mark">
+                                    <Canvas Width="11" Height="11">
+                                        <Line X1="5.5" Y1="0" X2="5.5" Y2="11"
+                                              Stroke="{StaticResource ColorTextMuted}" StrokeThickness="1"
+                                              SnapsToDevicePixels="True" />
+                                        <Line X1="0" Y1="5.5" X2="11" Y2="5.5"
+                                              Stroke="{StaticResource ColorTextMuted}" StrokeThickness="1"
+                                              SnapsToDevicePixels="True" />
+                                    </Canvas>
+                                </ControlTemplate>
+                            </Canvas.Resources>
+
+                            <Control Template="{StaticResource Mark}" Canvas.Left="-6" Canvas.Top="-6" />
+                            <Control Template="{StaticResource Mark}" Canvas.Right="-6" Canvas.Top="-6" />
+                            <Control Template="{StaticResource Mark}" Canvas.Left="-6" Canvas.Bottom="-6" />
+                            <Control Template="{StaticResource Mark}" Canvas.Right="-6" Canvas.Bottom="-6" />
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================================================================
+         Buttons
+
+         Square corners, condensed uppercase label. The primary is the one
+         solid object on the board; the secondary is an outline; the ghost
+         carries no frame at all. Hover and pressed come off the accent ramp,
+         never the browser's - or here, never the WPF default chrome.
+         ================================================================== -->
+
+    <Style x:Key="ButtonBase" TargetType="Button">
+        <Setter Property="FontFamily" Value="{StaticResource FontHeading}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource ColorText}" />
+        <Setter Property="Padding" Value="12,7" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource RadiusMd}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--
+                            The focus ring is the design's 2px accent outline. WPF has no
+                            outline-offset, so it is drawn as a second border on the same
+                            element; at 2px against a 1px frame it still reads as a ring.
+                        -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush"
+                                    Value="{StaticResource ColorAccent}" />
+                            <Setter TargetName="Chrome" Property="BorderThickness" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Background" Value="{StaticResource ColorAccent}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ColorAccent}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{StaticResource ColorBg}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ColorAccent600}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ColorAccent600}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ColorAccent700}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ColorAccent700}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource ColorBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource TintHover}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource TintPressed}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="GhostButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{StaticResource ColorAccent700}" />
+        <Setter Property="Padding" Value="4,3" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource TintAccentHover}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource TintAccentPressed}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ==================================================================
+         Tags
+
+         The small outlined count beside a tab, and the tinted label in a
+         table cell. Square, hairline, condensed.
+         ================================================================== -->
+
+    <Style x:Key="TagOutline" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource ColorBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="5,1" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TagText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontBody}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource ColorNeutral700}" />
+    </Style>
+
+</ResourceDictionary>

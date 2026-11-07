@@ -1,0 +1,655 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11E0C118-BDA7-4FD0-9369-5DC9B384C330}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiscrepancyScanner</RootNamespace>
+    <AssemblyName>DiscrepancyScanner</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <!--
+      The XAML markup compiler normally runs in its own AppDomain, which has no binding
+      redirects and so fails to load the netstandard facades this project pulls in through
+      System.Text.Json. Running it in the build's own AppDomain picks up the redirects.
+    -->
+    <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
+  </PropertyGroup>
+  <!--
+    Where the Revit and ETABS SDK assemblies live. They are not redistributable, so they are
+    referenced from the local product install rather than checked in. Override on the command
+    line to build against a different install, e.g.
+      msbuild /p:RevitVersion=2024 /p:EtabsVersion=22
+    or point at a directory directly with /p:RevitApiDir=... /p:EtabsApiDir=...
+  -->
+  <PropertyGroup>
+    <RevitVersion Condition=" '$(RevitVersion)' == '' ">2025</RevitVersion>
+    <EtabsVersion Condition=" '$(EtabsVersion)' == '' ">22</EtabsVersion>
+    <SafeVersion Condition=" '$(SafeVersion)' == '' ">22</SafeVersion>
+    <ProgramFilesRoot Condition=" '$(ProgramFilesRoot)' == '' ">$(ProgramW6432)</ProgramFilesRoot>
+    <ProgramFilesRoot Condition=" '$(ProgramFilesRoot)' == '' ">$(ProgramFiles)</ProgramFilesRoot>
+    <RevitApiDir Condition=" '$(RevitApiDir)' == '' ">$(ProgramFilesRoot)\Autodesk\Revit $(RevitVersion)</RevitApiDir>
+    <EtabsApiDir Condition=" '$(EtabsApiDir)' == '' ">$(ProgramFilesRoot)\Computers and Structures\ETABS $(EtabsVersion)</EtabsApiDir>
+    <SafeApiDir Condition=" '$(SafeApiDir)' == '' ">$(ProgramFilesRoot)\Computers and Structures\SAFE $(SafeVersion)</SafeApiDir>
+    <!--
+      CSiAPIv1.dll is the assembly CSI ships with every one of its products, and the ETABS and
+      SAFE copies are the same interfaces: identical COM interface GUIDs, identical method
+      signatures, identical enum names and values. That is what lets a single build drive both
+      programs. Either copy will do, so take whichever product is installed - ETABS first,
+      because that is the one every existing user of this add-in already has.
+    -->
+    <CsiApiDir Condition=" '$(CsiApiDir)' == '' And Exists('$(EtabsApiDir)\CSiAPIv1.dll') ">$(EtabsApiDir)</CsiApiDir>
+    <CsiApiDir Condition=" '$(CsiApiDir)' == '' ">$(SafeApiDir)</CsiApiDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSiAPIv1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a93c9e72eabf762, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(CsiApiDir)\CSiAPIv1.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RevitAPI">
+      <HintPath>$(RevitApiDir)\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(RevitApiDir)\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comparison\CheckOutcome.cs" />
+    <Compile Include="Comparison\SectionExtents.cs" />
+    <Compile Include="Comparison\CheckSwitches.cs" />
+    <Compile Include="Comparison\RevitLeaveOut.cs" />
+    <Compile Include="Comparison\TwoWayPairing.cs" />
+    <Compile Include="Comparison\PairingOverrides.cs" />
+    <Compile Include="Comparison\HeightZones.cs" />
+    <Compile Include="Comparison\PairPlace.cs" />
+    <Compile Include="Comparison\ReviewNotes.cs" />
+    <Compile Include="Comparison\RunHistory.cs" />
+    <Compile Include="Comparison\ColumnCompareEngine.cs" />
+    <Compile Include="Comparison\CrossPairEngine.cs" />
+    <Compile Include="Comparison\ColumnGroupCheck.cs" />
+    <Compile Include="Comparison\EndpointCompareEngine.cs" />
+    <Compile Include="Comparison\LoadProfile.cs" />
+    <Compile Include="Comparison\LineLoadRun.cs" />
+    <Compile Include="Comparison\LoadBand.cs" />
+    <Compile Include="Comparison\SidlCAreaCompareEngine.cs" />
+    <Compile Include="Comparison\SidlCAreaPieces.cs" />
+    <Compile Include="Comparison\LineLoadResult.cs" />
+    <Compile Include="Comparison\LineLoadCompareEngine.cs" />
+    <Compile Include="Comparison\PairedColumn.cs" />
+    <Compile Include="Comparison\PairedWall.cs" />
+    <Compile Include="Comparison\WallCompareEngine.cs" />
+    <Compile Include="Comparison\CheckTiming.cs" />
+    <Compile Include="Comparison\PlanRegionQuick.cs" />
+    <Compile Include="Comparison\ConstrainedDelaunay.cs" />
+    <Compile Include="Comparison\StackedShells.cs" />
+    <Compile Include="Comparison\SlabCoverage.cs" />
+    <Compile Include="Comparison\PlanClip.cs" />
+    <Compile Include="Comparison\SlabCheckInputs.cs" />
+    <Compile Include="Comparison\LineLoadCheckInputs.cs" />
+    <Compile Include="Comparison\SlabSupports.cs" />
+    <Compile Include="Comparison\SlabMeshCompare.cs" />
+    <Compile Include="Comparison\TriangleMerge.cs" />
+    <Compile Include="Comparison\GeometryDump.cs" />
+    <Compile Include="Comparison\PlanRegionMath.cs" />
+    <Compile Include="Comparison\ResultField.cs" />
+    <Compile Include="Comparison\SlabCompareEngine.cs" />
+    <Compile Include="Comparison\SlabZone.cs" />
+    <Compile Include="DataContainers\AreaLoad_E.cs" />
+    <Compile Include="DataContainers\LoadRegion_R.cs" />
+    <Compile Include="Loads\LineLoadPatterns.cs" />
+    <Compile Include="Loads\LineLoadWriteBack.cs" />
+    <Compile Include="Loads\LineLoadStyleSuggestion.cs" />
+    <Compile Include="Loads\LineLoadSchedule.cs" />
+    <Compile Include="Loads\LineLoadScheduleReader.cs" />
+    <Compile Include="Loads\LineLoadHeight.cs" />
+    <Compile Include="Loads\LoadCoverage.cs" />
+    <Compile Include="Loads\LoadLabel.cs" />
+    <Compile Include="Loads\LoadPatternMap.cs" />
+    <Compile Include="Loads\LoadSchedule.cs" />
+    <Compile Include="Loads\LoadScheduleReader.cs" />
+    <Compile Include="Loads\ScheduleColumnOverrides.cs" />
+    <Compile Include="Loads\ScheduleEdits.cs" />
+    <Compile Include="Loads\ScheduleNames.cs" />
+    <Compile Include="Loads\XlsxCellWriter.cs" />
+    <Compile Include="Loads\XlsxWorkbook.cs" />
+    <Compile Include="DataContainers\Column_e.cs" />
+    <Compile Include="DataContainers\Column_r.cs" />
+    <Compile Include="DataContainers\ParameterMapping.cs" />
+    <Compile Include="DataContainers\ProjectParameterMappings.cs" />
+    <Compile Include="DataContainers\SketchFloor.cs" />
+    <Compile Include="DataContainers\ColumnGeometry.cs" />
+    <Compile Include="DataContainers\IColumn.cs" />
+    <Compile Include="DataContainers\PlanPolygon.cs" />
+    <Compile Include="DataContainers\PlanRegions.cs" />
+    <Compile Include="DataContainers\SectionShape.cs" />
+    <Compile Include="DataContainers\Slab_E.cs" />
+    <Compile Include="DataContainers\Slab_R.cs" />
+    <Compile Include="DataContainers\DataContainer.cs" />
+    <Compile Include="DataContainers\EtabsDataContainer.cs" />
+    <Compile Include="DataContainers\EtabsModelFile.cs" />
+    <Compile Include="DataContainers\PrefrencesData.cs" />
+    <Compile Include="DataContainers\Story_E.cs" />
+    <Compile Include="DataContainers\LineLoad_E.cs" />
+    <Compile Include="DataContainers\LineLoad_R.cs" />
+    <Compile Include="DataContainers\SidlCSource_R.cs" />
+    <Compile Include="DataContainers\WallProfile.cs" />
+    <Compile Include="DataContainers\SidlCAreaSource_R.cs" />
+    <Compile Include="DataContainers\IPlanLine.cs" />
+    <Compile Include="DataContainers\IWall.cs" />
+    <Compile Include="DataContainers\Wall_E.cs" />
+    <Compile Include="DataContainers\Wall_R.cs" />
+    <Compile Include="DataContainers\WallCorners.cs" />
+    <Compile Include="DataContainers\WallGeometry.cs" />
+    <Compile Include="Export\BeamMarkExport.cs" />
+    <Compile Include="Export\ExcelWorkbookWriter.cs" />
+    <Compile Include="gui\Graphics\ComparasonState.cs" />
+    <Compile Include="gui\Graphics\DrawAble.cs" />
+    <Compile Include="gui\Graphics\IDrawAble.cs" />
+    <Compile Include="gui\Graphics\GraphicsExtension.cs" />
+    <Compile Include="gui\Graphics\MessageType.cs" />
+    <Compile Include="gui\Graphics\MyMessage.cs" />
+    <Compile Include="gui\PopupForms\LinkSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\PopupForms\EtabsIssuesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\PopupForms\EtabsFrameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\PopupForms\EtabsFrameForm.Designer.cs">
+      <DependentUpon>EtabsFrameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\PopupForms\RevitFrameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\PopupForms\RevitFrameForm.Designer.cs">
+      <DependentUpon>RevitFrameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\PopupForms\PairedFrameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\PopupForms\PairedFrameForm.Designer.cs">
+      <DependentUpon>PairedFrameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\Graphics\VisabilityController.cs" />
+    <Compile Include="gui\PopupForms\PrefrencesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\PopupForms\PrefrencesForm.Designer.cs">
+      <DependentUpon>PrefrencesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Revit\AddinAssemblies.cs" />
+    <Compile Include="Revit\BeamsCheckCommand.cs" />
+    <Compile Include="Revit\ModelCheckCommand.cs" />
+    <Compile Include="wpf\Rendering\ModelCanvas.cs" />
+    <Compile Include="wpf\Rendering\PlanSnap.cs" />
+    <Compile Include="wpf\Rendering\ViewPalette.cs" />
+    <Compile Include="wpf\Rendering\VerdictColours.cs" />
+    <Compile Include="wpf\Services\Json.cs" />
+    <Compile Include="wpf\Services\RevitRequestHandler.cs" />
+    <Compile Include="wpf\Services\UserSettings.cs" />
+    <Compile Include="wpf\Services\LoadingPlanLinks.cs" />
+    <Compile Include="wpf\Services\Shortcuts.cs" />
+    <Compile Include="wpf\Services\ProjectFile.cs" />
+    <Compile Include="wpf\Services\SlabLoadDump.cs" />
+    <Compile Include="wpf\ViewModels\AlignmentViewModel.cs" />
+    <Compile Include="wpf\ViewModels\CheckResultFilter.cs" />
+    <Compile Include="wpf\ViewModels\FindingTally.cs" />
+    <Compile Include="wpf\ViewModels\Findings.cs" />
+    <Compile Include="wpf\ViewModels\Preflight.cs" />
+    <Compile Include="wpf\ViewModels\PairingEditor.cs" />
+    <Compile Include="wpf\ViewModels\ModelStatus.cs" />
+    <Compile Include="wpf\ViewModels\ComparisonViewModel.cs" />
+    <Compile Include="wpf\ViewModels\LoadingPlansViewModel.cs" />
+    <Compile Include="wpf\ViewModels\LoadingPlanGuessViewModel.cs" />
+    <Compile Include="wpf\ViewModels\LoadingPlanCopyViewModel.cs" />
+    <Compile Include="wpf\ViewModels\ElementViewModel.cs" />
+    <Compile Include="wpf\ViewModels\ElementViewModelFactory.cs" />
+    <Compile Include="wpf\ViewModels\WallStacks.cs" />
+    <Compile Include="wpf\ViewModels\RawElements.cs" />
+    <Compile Include="wpf\ViewModels\ForgetChoices.cs" />
+    <Compile Include="wpf\ViewModels\HeightZoneRequests.cs" />
+    <Compile Include="wpf\ViewModels\LabelFieldOption.cs" />
+    <Compile Include="wpf\ViewModels\SettingItem.cs" />
+    <Compile Include="wpf\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="wpf\ViewModels\ViewModelBase.cs" />
+    <Page Include="wpf\Theme\Industry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="wpf\Views\ElementChooserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\ElementChooserWindow.xaml.cs">
+      <DependentUpon>ElementChooserWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\PreflightWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\PreflightWindow.xaml.cs">
+      <DependentUpon>PreflightWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\ModelChooserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\ModelChooserWindow.xaml.cs">
+      <DependentUpon>ModelChooserWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\HeightZoneWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\HeightZoneWindow.xaml.cs">
+      <DependentUpon>HeightZoneWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\LevelsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\LevelsWindow.xaml.cs">
+      <DependentUpon>LevelsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\ForgetWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\ForgetWindow.xaml.cs">
+      <DependentUpon>ForgetWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\NoteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\NoteWindow.xaml.cs">
+      <DependentUpon>NoteWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\CheckWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\CheckWindow.xaml.cs">
+      <DependentUpon>CheckWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\IssueListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\IssueListWindow.xaml.cs">
+      <DependentUpon>IssueListWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\AlignWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\AlignWindow.xaml.cs">
+      <DependentUpon>AlignWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="wpf\Views\LoadingPlansWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="wpf\Views\LoadPatternsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="wpf\Views\ScheduleSheetWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\LoadingPlanCopyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\LoadingPlanCopyWindow.xaml.cs">
+      <DependentUpon>LoadingPlanCopyWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="wpf\Views\LoadingPlanGuessWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="wpf\Views\LoadingPlanGuessWindow.xaml.cs">
+      <DependentUpon>LoadingPlanGuessWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="wpf\ViewModels\ScheduleSheetViewModel.cs" />
+    <Compile Include="wpf\ViewModels\LoadPatternsViewModel.cs" />
+    <Compile Include="wpf\Views\LoadPatternsWindow.xaml.cs">
+      <DependentUpon>LoadPatternsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wpf\Views\ScheduleSheetWindow.xaml.cs">
+      <DependentUpon>ScheduleSheetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wpf\Views\LoadingPlansWindow.xaml.cs">
+      <DependentUpon>LoadingPlansWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataContainers\CompareEngine.cs" />
+    <Compile Include="Etabs\CsiProduct.cs" />
+    <Compile Include="Etabs\EtabsEngine.cs" />
+    <Compile Include="Etabs\ModelIndex.cs" />
+    <Compile Include="Etabs\LoadSetTables.cs" />
+    <Compile Include="Etabs\SectionDesignerTables.cs" />
+    <Compile Include="Etabs\AreaSectionTables.cs" />
+    <Compile Include="Etabs\cPlugin.cs" />
+    <Compile Include="gui\EtabsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\EtabsForm.Designer.cs">
+      <DependentUpon>EtabsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContainers\FrameData_e.cs" />
+    <Compile Include="DataContainers\FrameData_r.cs" />
+    <Compile Include="DataContainers\FrameData.cs" />
+    <Compile Include="gui\GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\GUI.Designer.cs">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Etabs\Joint.cs" />
+    <Compile Include="DataContainers\MyPoint.cs" />
+    <Compile Include="DataContainers\PairedFrame.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Revit\RevitEngine.cs" />
+    <Compile Include="Revit\TextHandling.cs" />
+    <Compile Include="DataContainers\MyTransformation.cs" />
+    <Compile Include="gui\TranslationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\TranslationForm.Designer.cs">
+      <DependentUpon>TranslationForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wpf\Theme\Fonts\Barlow-400.ttf" />
+    <Resource Include="wpf\Theme\Fonts\Barlow-500.ttf" />
+    <Resource Include="wpf\Theme\Fonts\Barlow-600.ttf" />
+    <Resource Include="wpf\Theme\Fonts\Barlow-700.ttf" />
+    <Resource Include="wpf\Theme\Fonts\BarlowCondensed-400.ttf" />
+    <Resource Include="wpf\Theme\Fonts\BarlowCondensed-500.ttf" />
+    <Resource Include="wpf\Theme\Fonts\BarlowCondensed-600.ttf" />
+    <Resource Include="wpf\Theme\Fonts\BarlowCondensed-700.ttf" />
+    <None Include="wpf\Theme\Fonts\OFL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\FrameData.datasource" />
+    <None Include="DiscrepancyScanner.addin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gui\EtabsForm.resx">
+      <DependentUpon>EtabsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\PopupForms\EtabsFrameForm.resx">
+      <DependentUpon>EtabsFrameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\PopupForms\RevitFrameForm.resx">
+      <DependentUpon>RevitFrameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\PopupForms\PairedFrameForm.resx">
+      <DependentUpon>PairedFrameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\GUI.resx">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\PopupForms\PrefrencesForm.resx">
+      <DependentUpon>PrefrencesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\TranslationForm.resx">
+      <DependentUpon>TranslationForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_in_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_out_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_wind_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_fit_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-hide-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-hide-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye 30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+      Reads tables out of the ETABS model text file. Kept as its own project because it
+      references neither the ETABS nor the Revit SDK - it is a reader of a file format - which
+      is what lets it be pointed at a real 65 MB model file in a test.
+    -->
+    <ProjectReference Include="..\EtabsTextModel\EtabsTextModel.csproj">
+      <Project>{7c4b1f52-0a8e-4e63-9c21-4e9e1b6a5d74}</Project>
+      <Name>EtabsTextModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
+  <!--
+    Writes down where this build put the add-in, for AddinAssemblies to read back at runtime.
+
+    Revit, loading the add-in from a .addin manifest, finds CSiAPIv1.dll and EtabsTextModel.dll
+    beside it in this same folder and none of this matters. The Add-in Manager copies
+    DiscrepancyScanner.dll on its own into a temporary folder and loads that, and from there
+    the only way back to the two DLLs is to have written down where they were left.
+  -->
+  <!--
+    Carries CSiAPIv1.dll and EtabsTextModel.dll inside DiscrepancyScanner.dll as well as beside
+    it, for AddinAssemblies to load from bytes when the Add-in Manager's lone copy cannot reach
+    the files - or reaches them and is refused, because another copy of the add-in loaded in
+    the same Revit session already holds them. Taken from the resolved references, so it is
+    always the exact files this build was compiled against.
+  -->
+  <Target Name="EmbedAddinManagerDependencies" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferencePath)" Condition="'%(Filename)' == 'CSiAPIv1' Or '%(Filename)' == 'EtabsTextModel'">
+        <LogicalName>DiscrepancyScanner.Embedded.%(Filename)%(Extension)</LogicalName>
+        <WithCulture>false</WithCulture>
+        <Type>Non-Resx</Type>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
+  <Target Name="RecordBuildFolder" BeforeTargets="BeforeCompile">
+    <PropertyGroup>
+      <AddinBuildFolder>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\$(OutputPath)'))</AddinBuildFolder>
+      <AddinBuildFolderSource>$(IntermediateOutputPath)AddinBuildFolder.g.cs</AddinBuildFolderSource>
+    </PropertyGroup>
+    <MakeDir Directories="$(IntermediateOutputPath)" />
+    <WriteLinesToFile File="$(AddinBuildFolderSource)" Overwrite="true" WriteOnlyWhenDifferent="true" Lines="namespace DiscrepancyScanner { internal static class AddinBuildFolder { internal const string Path = @&quot;$(AddinBuildFolder)&quot;%3B } }" />
+    <ItemGroup>
+      <Compile Include="$(AddinBuildFolderSource)" />
+      <FileWrites Include="$(AddinBuildFolderSource)" />
+    </ItemGroup>
+  </Target>
+  <!--
+    Gives every build a version of its own - 1.0.yyDDD.(seconds since midnight / 2) - and
+    names it in the windows' pack URIs.
+
+    The Add-in Manager loads a fresh copy of the DLL each time it is rebuilt, and the copies
+    before it stay loaded until Revit closes. A window finds its XAML by a pack URI, which
+    names the assembly by its short name alone, and with two copies loaded that can find the
+    other copy's XAML - which WPF refuses with "The component ... does not have a resource
+    identified by the URI". Set here, the markup compiler writes the version into every
+    window's URI (/DiscrepancyScanner;V1.0.26265.1234;component/...), and each copy finds
+    its own.
+  -->
+  <Target Name="StampBuildVersion" BeforeTargets="MarkupCompilePass1;BeforeCompile">
+    <PropertyGroup>
+      <_BuildDay>$([MSBuild]::Add($([MSBuild]::Multiply($([System.DateTime]::Now.ToString('yy')), 1000)), $([System.DateTime]::Now.DayOfYear)))</_BuildDay>
+      <_BuildTime>$([System.Math]::Floor($([MSBuild]::Divide($([System.DateTime]::Now.TimeOfDay.TotalSeconds), 2))))</_BuildTime>
+      <AssemblyVersion>1.0.$(_BuildDay).$(_BuildTime)</AssemblyVersion>
+      <BuildVersionSource>$(IntermediateOutputPath)BuildVersion.g.cs</BuildVersionSource>
+    </PropertyGroup>
+    <MakeDir Directories="$(IntermediateOutputPath)" />
+    <WriteLinesToFile File="$(BuildVersionSource)" Overwrite="true" Lines="[assembly: System.Reflection.AssemblyVersion(&quot;$(AssemblyVersion)&quot;)]" />
+    <ItemGroup>
+      <Compile Include="$(BuildVersionSource)" />
+      <FileWrites Include="$(BuildVersionSource)" />
+    </ItemGroup>
+  </Target>
+  <!--
+    The Revit 2025 API assemblies are built against .NET 8 and reference netstandard 2.1.
+    The C# compiler copes with that, but the legacy XAML markup compiler reflection-loads
+    the whole reference closure in a .NET Framework AppDomain and fails with MC1000. The XAML
+    never touches the Revit API, so the reference is taken out of the markup compiler's view
+    and put straight back for the actual compile.
+  -->
+  <Target Name="HideRevitApiFromMarkupCompiler" BeforeTargets="MarkupCompilePass1">
+    <ItemGroup>
+      <_RevitApiReferenceStash Include="@(ReferencePath)" Condition="'%(FileName)' == 'RevitAPI' Or '%(FileName)' == 'RevitAPIUI'" />
+      <ReferencePath Remove="@(_RevitApiReferenceStash)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="RestoreRevitApiAfterMarkupCompiler" AfterTargets="MarkupCompilePass1">
+    <ItemGroup>
+      <ReferencePath Include="@(_RevitApiReferenceStash)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
+  </Target>
+</Project>

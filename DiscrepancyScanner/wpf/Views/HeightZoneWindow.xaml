@@ -1,0 +1,49 @@
+﻿<Window x:Class="DiscrepancyScanner.Wpf.HeightZoneWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Height zone"
+        Width="440" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ColorBg}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/Industry.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="ShowWhenTrue" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel Margin="18,16">
+        <TextBlock DockPanel.Dock="Top" Text="{Binding Heading}" Style="{StaticResource SectionLabel}" />
+        <TextBlock DockPanel.Dock="Top" Text="{Binding About}" Style="{StaticResource CaptionText}"
+                   TextWrapping="Wrap" Margin="0,4,0,14" />
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Margin="0,16,0,0">
+            <Button Content="SAVE" IsDefault="True" Click="OnSaveClick" MinWidth="90"
+                    IsEnabled="{Binding IsValid}" Style="{StaticResource PrimaryButton}" />
+            <Button Content="CANCEL" IsCancel="True" MinWidth="90" Margin="8,0,0,0"
+                    Style="{StaticResource SecondaryButton}" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="Floor to floor height (m)" FontWeight="SemiBold" Margin="0,0,0,3" />
+            <TextBox x:Name="heightBox" Width="140" HorizontalAlignment="Left" Padding="4,3"
+                     FontFamily="{StaticResource FontBody}" FontSize="13"
+                     Text="{Binding HeightText, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="{Binding Problem}" Foreground="#FFB30F14" FontSize="11" TextWrapping="Wrap"
+                       Margin="0,3,0,0"
+                       Visibility="{Binding HasProblem, Converter={StaticResource ShowWhenTrue}}" />
+
+            <StackPanel Margin="0,12,0,0" Visibility="{Binding CanName, Converter={StaticResource ShowWhenTrue}}">
+                <TextBlock Text="Name (optional)" FontWeight="SemiBold" Margin="0,0,0,3" />
+                <TextBox Padding="4,3" FontFamily="{StaticResource FontBody}" FontSize="13"
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="What to call it on the plan - lobby, plant room." />
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

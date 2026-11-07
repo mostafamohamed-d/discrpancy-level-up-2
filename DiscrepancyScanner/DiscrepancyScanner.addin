@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+
+  <AddIn Type="Command">
+    <Name>Discrepancy Scanner - Beams Check</Name>
+    <FullClassName>DiscrepancyScanner.BeamsCheckCommand</FullClassName>
+    <Text>Discrepancy Scanner - Beams Check</Text>
+    <Description>Check beam reinforcement marks against the ETABS design output.</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <Assembly>C:\Addins\DiscrepancyScanner.dll</Assembly>
+    <AddInId>
+			95AC8477-28D6-48B5-8D96-A50803244F8E
+		</AddInId>
+    <VendorId>ABDELRAHMAN</VendorId>
+    <VendorDescription>Abdelrahman Sayed</VendorDescription>
+  </AddIn>
+
+  <AddIn Type="Command">
+    <Name>Discrepancy Scanner - Model Check</Name>
+    <FullClassName>DiscrepancyScanner.ModelCheckCommand</FullClassName>
+    <Text>Discrepancy Scanner - Model Check</Text>
+    <Description>Compare the ETABS and Revit models: beam reinforcement, column location, orientation and section, and slab thickness and openings</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <Assembly>C:\Addins\DiscrepancyScanner.dll</Assembly>
+    <AddInId>
+			2F1A6C74-3D5E-4A18-9B0C-7E6D4C21A9F3
+		</AddInId>
+    <VendorId>ABDELRAHMAN</VendorId>
+    <VendorDescription>Abdelrahman Sayed</VendorDescription>
+  </AddIn>
+
+</RevitAddIns>

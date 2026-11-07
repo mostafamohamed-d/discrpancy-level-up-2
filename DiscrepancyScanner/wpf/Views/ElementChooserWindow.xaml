@@ -1,0 +1,54 @@
+﻿<Window x:Class="DiscrepancyScanner.Wpf.ElementChooserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Which one?"
+        Height="330" Width="420" MinHeight="240" MinWidth="320"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ColorBg}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/Industry.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel Margin="16">
+        <TextBlock DockPanel.Dock="Top" Text="UNDER THE CURSOR" Style="{StaticResource SectionLabel}" />
+        <TextBlock DockPanel.Dock="Top" Style="{StaticResource CaptionText}" Margin="0,2,0,10"
+                   Text="Nearest first. Pick the one you meant." />
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Margin="0,12,0,0">
+            <Button Content="SELECT" IsDefault="True" Click="OnSelectClick" MinWidth="90"
+                    Style="{StaticResource PrimaryButton}" />
+            <Button Content="CANCEL" IsCancel="True" MinWidth="90" Margin="8,0,0,0"
+                    Style="{StaticResource SecondaryButton}" />
+        </StackPanel>
+
+        <!-- double click picks, because a list of two is not worth two clicks -->
+        <ListBox x:Name="list" BorderBrush="{StaticResource ColorDivider}" BorderThickness="1"
+                 Background="Transparent" HorizontalContentAlignment="Stretch"
+                 MouseDoubleClick="OnSelectClick"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Margin="2,4">
+                        <Rectangle DockPanel.Dock="Left" Width="9" Height="9" Margin="0,3,8,0"
+                                   VerticalAlignment="Top" Fill="{Binding Swatch}" />
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding DistanceText}"
+                                   Style="{StaticResource CaptionText}" VerticalAlignment="Top"
+                                   Margin="8,1,0,0" />
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" Style="{StaticResource BodyText}" />
+                            <TextBlock Text="{Binding Note}" Style="{StaticResource CaptionText}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</Window>
